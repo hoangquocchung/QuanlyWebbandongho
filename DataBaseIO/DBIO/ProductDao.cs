@@ -63,11 +63,11 @@ namespace DataBaseIO.DBIO
 
         // Phần dùng chung cho Admin
 
-        public List<ProductModelView> listAllProductModel(string searchString, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
+        public List<ProductModelView> listAllProductModel(ref int totalRecord, int pageIndex = 1, int pageSize = 2)
         {
             totalRecord = db.Products.Count();
-            IQueryable<Product> model = db.Products;
-            var dao = (from a in db.Products
+            //IQueryable<Product> model = db.Products;
+            var model = (from a in db.Products
                          join b in db.ProductDetails
                          // Trong bảng SanPhams join với bảng ChitietSanphams
                          on a.ID equals b.ID
@@ -134,8 +134,8 @@ namespace DataBaseIO.DBIO
 
                          });
             // Mỗi bản ghi lấy được sẽ chuyển thành object ProductViewModel
-            dao.OrderByDescending(x => x.CreatedDate);
-            return dao.ToList();
+            model.OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            return model.ToList();
 
         }
     }

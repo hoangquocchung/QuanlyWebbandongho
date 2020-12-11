@@ -15,8 +15,8 @@
     {
         <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-                <input type="text" value="@ViewBag.ChuoiTimKiem" name="searchString" />
-                <input type="submit" value="Tìm kiếm" class="input-group-append" style="margin-right:50px;" />
+                @*<input type="text" value="@ViewBag.ChuoiTimKiem" name="searchString" />
+    <input type="submit" value="Tìm kiếm" class="input-group-append" style="margin-right:50px;" />*@
                 <a class="btn btn-primary" href="/Admin/product/Create">Thêm mới</a>
             </div>
         </div>
@@ -70,7 +70,7 @@
         var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
         var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
 
-        var link = "/Admin/Menu";
+        var link = "/Admin/Product";
         <div class="row">
             <div class="col-sm-12 col-md-7">
                 <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">

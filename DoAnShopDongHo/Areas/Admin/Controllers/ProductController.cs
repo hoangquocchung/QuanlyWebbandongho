@@ -10,11 +10,10 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         // GET: Admin/Product
-        public ActionResult Index(string searchString, int page = 1, int pageSize = 3)
+        public ActionResult Index(int page = 1, int pageSize = 3)
         {
             int totalRecord = 0;
-            var model = new ProductDao().listAllProductModel(searchString, ref totalRecord, page, pageSize);
-            ViewBag.ChuoiTimKiem = searchString;
+            var model = new ProductDao().listAllProductModel(ref totalRecord, page, pageSize);
 
             ViewBag.Page = page;
             int maxPage = 5;
