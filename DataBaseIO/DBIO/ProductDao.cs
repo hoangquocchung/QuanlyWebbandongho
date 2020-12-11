@@ -78,6 +78,7 @@ namespace DataBaseIO.DBIO
                          {
                              ID = a.ID,
                              Name = a.Name,
+                             Code = a.Code,
                              Image = a.Image,
                              MoreImages = a.MoreImages,
                              Metatitle = a.MetaTitle,
@@ -88,6 +89,8 @@ namespace DataBaseIO.DBIO
                              Quantity = a.Quantity,
                              CreatedDate = DateTime.Now,
                              TopHot = a.TopHot,
+
+                             NameCategoty = c.NameCategory,
 
                              XuatXu = b.XuatXu,
                              Kieudang = b.KhieuDang,
@@ -104,6 +107,7 @@ namespace DataBaseIO.DBIO
                          {
                              ID = x.ID,
                              Name = x.Name,
+                             Code = x.Code,
                              Image = x.Image,
                              MoreImages = x.MoreImages,
                              Metatitle = x.Metatitle,
@@ -114,6 +118,8 @@ namespace DataBaseIO.DBIO
                              Quantity = x.Quantity,
                              CreatedDate = DateTime.Now,
                              TopHot = x.TopHot,
+
+                             NameCategoty = x.NameCategoty,
 
                              XuatXu = x.XuatXu,
                              Kieudang = x.Kieudang,
