@@ -13,5 +13,6 @@ namespace DoAnShopDongHo.Areas.Admin.Models
         [Required(ErrorMessage = "Mời bạn nhập passWord")]
         public string PassWord { set; get; }
         public bool RememberMe { set; get; }
+        // đã đưa lên git
     }
 }
