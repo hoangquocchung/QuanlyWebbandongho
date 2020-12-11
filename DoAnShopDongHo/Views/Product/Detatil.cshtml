@@ -1,0 +1,325 @@
+﻿@model KetNoiCSDL.EF.Product
+@{
+    ViewBag.Title = "Detatil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var detail = (KetNoiCSDL.EF.ProductDetail)ViewBag.productDetail;
+    var related = (List<KetNoiCSDL.EF.Product>)ViewBag.ListRelatedProduct;
+}
+@section jsFooter{
+    <script src="/Assets/Client/js/product.js"></script>
+}
+
+
+<!--Bread columns-->
+<div class="bread__columns">
+    <div class="container">
+        <span>Trang chủ > </span>  <span>Chi tiết sản phẩm > </span> <span>NOMOS LUX Glashütte</span>
+    </div>
+
+</div>
+<!-- Product detail -->
+<section class="section product-detail">
+    <div class="product-detail__center container">
+        <div class="product-detail__box">
+            <div class="img-ct" style="height: 70vh; text-align: center;">
+                <img src="@Model.Image" id="productImg">
+                <div class="small-img-row">
+                    <div class="small-img-col">
+                        <img src="images/features-2.jpg" width="100%" class="small-img" />
+                    </div>
+                    <div class="small-img-col">
+                        <img src="images/features-3.jpg" width="100%" class="small-img" />
+                    </div>
+                    <div class="small-img-col">
+                        <img src="images/features-4.jpg" width="100%" class="small-img" />
+                    </div>
+                    <div class="small-img-col">
+                        <img src="images/features-4.jpg" width="100%" class="small-img" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="product-detail__box">
+            <div class="infos">
+                <h2>@Model.Name</h2>
+                <div class="reviews">
+                    <div class="rating">
+                        <span>
+                            <svg>
+                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                            </svg>
+                        </span>
+                        <span>
+                            <svg>
+                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                            </svg>
+                        </span>
+                        <span>
+                            <svg>
+                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                            </svg>
+                        </span>
+                        <span>
+                            <svg>
+                                <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                            </svg>
+                        </span>
+                        <span>
+                            <svg>
+                                <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                            </svg>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="price">
+                    @if (Model.PromotionPrice == null)
+                    {
+                        <h3>@(Model.Price.GetValueOrDefault(0).ToString("N0")) VNĐ</h3>
+                    }
+                    else
+                    {
+                        <h3>@(Model.PromotionPrice.GetValueOrDefault(0).ToString("N0")) VNĐ</h3>
+                        <h3>@(Model.Price.GetValueOrDefault(0).ToString("N0")) VNĐ</h3>
+                    }
+                </div>
+
+                <div id="more-infos">
+                    <h4 class="choose">Thông tin cơ bản</h4>
+                </div>
+
+                <h3 class="paragraph">
+                    <div class="item">
+                        <span class="text">Đường kính mặt</span>
+                        <span class="text">@detail.DuongKinhMat</span>
+                    </div>
+                    <div class="item">
+                        <span class="text">Độ chịu nước</span>
+                        <span class="num">@detail.DoChiuNuoc</span>
+                    </div>
+                    <div class="item">
+                        <span class="text">Chất liệu mặt</span>
+                        <span class="num">@detail.ChatLieuMat</span>
+                    </div>
+                    <div class="item">
+                        <span class="text">Năng lượng sử dụng</span>
+                        <span class="num">@detail.nangLuong</span>
+                    </div>
+                </h3>
+
+                <div class="quantity">
+                    <h3>Số lượng :</h3>
+                    <span class="soluong">@Model.Quantity</span>
+                </div>
+
+                <div class="hotline">
+                    <span>Gọi đặt mua: </span>
+                    <a href="tel:18006005" title="18006005"><span class="icon"><i class="fa fa-phone" aria-hidden="true"></i></span> 1800.6005</a>
+                    <span>(8:30 - 21:30)</span>
+                </div>
+
+                <div class="buttons">
+                    <a href="/them-gio-hang?productId=@Model.ID&quantity=1" title="Add to cart" id="add-to-cart">
+                        <span><i class="fa fa-shopping-cart"></i>THÊM GIỎ HÀNG</span>
+                        <span>Giao hàng miễn phí - Thanh toán tại nhà</span>
+                    </a>
+                    <a href="#">
+                        <span>Trả góp 0% dễ dàng qua thẻ</span>
+                        <span>Visa, Master, JCB</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- information -->
+
+<section class="section information">
+    <div class="information__center container">
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'tab-info1')" style="margin-left: 3rem;">MÔ TẢ</button>
+            <button class="tablinks" onclick="openCity(event, 'tab-info2')" style="margin-left: 3rem;">CHẾ ĐỘ BẢO HÀNH & HẬU MÃI</button>
+        </div>
+
+        <div id="tab-info1" class="tabcontent" style="display: block;">
+            <div class="Describe__center">
+                <div class="box__title">
+                    <div class="thong-tin-san-pham">
+                        <p><strong>Đường kính mặt:</strong> <a href="#" target="_blank" rel="noopener noreferrer" data-wpel-link="internal">@detail.DuongKinhMat</a></p>
+                        <p><strong>Chống nước:</strong> <a href="#" target="_blank" rel="noopener noreferrer" data-wpel-link="internal">@detail.DoChiuNuoc</a></p>
+                        <p><strong>Chất liệu mặt:</strong> @detail.ChatLieuMat</p>
+                        <p><strong>Năng lượng sử dụng:</strong> @detail.nangLuong</p>
+                        <p><strong>Size dây:</strong> <a href="#" target="_blank" rel="noopener noreferrer" data-wpel-link="internal">@detail.SizeDay</a></p>
+                        <p><strong>Chất liệu dây:</strong> <a href="#" target="_blank" rel="noopener noreferrer" data-wpel-link="internal">@detail.ChatLieuDay</a></p>
+                        <p><strong>Kiểu dáng:</strong> @detail.KhieuDang</p>
+                        <p><strong>Bảo Hành Tại Hải Triều:</strong> 5 Năm</p>
+                        <p><strong>Xuất xứ:</strong> @detail.XuatXu</p>
+                        <p><strong>Bề Dày Mặt Số:</strong> 9mm</p>
+                        <p><strong>Chế độ bảo hành:</strong> <a href="#" target="_blank" rel="noopener noreferrer" data-wpel-link="internal">@detail.CheDoBaoHanh</a></p>
+                    </div>
+                </div>
+                <div class="box__img" style="flex-basis: 70%;">
+                    @Model.Detail
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div id="tab-info2" class="tabcontent">
+            <span style="font-size: 14pt; font-family: 'courier new', courier, monospace;">Chế Độ Bảo Hành</span>
+            <strong><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Tất cả các đồng hồ khi bán ra đều kèm theo 2 phiếu bảo hành:</span></strong>
+            <ul style="list-style-type: square;">
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">1 Phiếu Bảo Hành (hoặc Thẻ Bảo Hành/Sổ Bảo Hành) của hãng có giá trị bảo hành Quốc tế (Thời gian bảo hành tùy theo quy định của từng hãng).</span></li>
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">1 Phiếu Bảo Hành của Hải Triều (Sử dụng để được thay pin miễn phí vĩnh viễn &amp; Hưởng chế độ bảo hành tăng thêm từ 1-4 năm của Hải Triều).</span></li>
+            </ul>
+            <span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;"><strong>Ví dụ:</strong> Đồng Hồ Citizen có chế độ bảo hành chính hãng: máy = 12 tháng, Pin = 12 tháng.</span>
+            <ul style="list-style-type: square;">
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Khi mua tại Hải Triều, Khách hàng sẽ được tặng thêm thời gian bảo hành từ 4 năm về máy. Pin = Vĩnh Viễn.</span></li>
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Tổng cộng: Khi mua tại Hải Triều, đồng hồ Citizen&nbsp;sẽ được bảo hành máy = 05 năm, Pin = Vĩnh Viễn.</span></li>
+            </ul>
+            <strong><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Lưu ý:</span></strong>
+            <ul style="list-style-type: square;">
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Đối với sản phẩm còn trong thời gian bảo hành Quốc Tế: Quý khách có thể đem tới Hải Triều hoặc bất kỳ nhà trung tâm bảo hành nào của hãng được ghi trên phiếu để yêu cầu được kiểm tra đồng hồ.</span></li>
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Đối với sản phẩm hết thời gian bảo hành Quốc Tế nhưng vẫn trong thời gian bảo hành tại Hải Triều: Quý khách đem đồng hồ kèm Phiếu Bảo Hành của Hải Triều tới bất kỳ chi nhánh nào của Hải Triều để được hướng dẫn và kiểm tra đồng hồ.</span></li>
+            </ul>
+            <strong><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Điều Kiện Được Bảo Hành</span></strong>
+            <ul style="list-style-type: square;">
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Bảo hành chỉ có giá trị khi đồng hồ có Phiếu bảo hành của hãng &amp; Phiếu bảo hành của Hải Triều đi kèm, điền chính xác, đầy đủ các thông tin.</span></li>
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Phiếu bảo hành phải còn nguyên vẹn, không rách, chấp vá, hoen ố, mờ nhạt.</span></li>
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Còn trong thời gian bảo hành. Thời gian bảo hành được tính từ ngày mua có ghi trên Phiếu Bảo Hành.</span></li>
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Chỉ bảo hành thay thế mới cho những linh kiện, phụ tùng bị hỏng – không thay thế bằng một chiếc đồng hồ khác.</span></li>
+            </ul>
+            <strong><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Điều Kiện Không Được Bảo Hành</span></strong>
+            <ul style="list-style-type: square !important;">
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Đồng hồ không có Phiếu bảo hành của hãng và Phiếu bảo hành của Hải Triều đi kèm.</span></li>
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Các loại dây đeo, khoá, vỏ, màu xi, mặt số, mặt kiếng bị hỏng hóc, vỡ do sử dụng không đúng, tai nạn, lão hóa tự nhiên, va đập, … trong quá trình sử dụng.</span></li>
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Hỏng hóc do hậu quả gián tiếp của việc sử dụng sai hướng dẫn của hãng có kèm theo đồng hồ.</span></li>
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Trầy xước về dây hoặc mặt kiếng bị trầy xước, vỡ do va chạm trong quá trình sử dụng.&nbsp;</span></li>
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Tự ý thay đổi máy móc bên trong, mở ra can thiệp sửa chữa trong thời gian còn bảo hành –&nbsp;Tại những nơi không phải là trung tâm của hãng</span></li>
+            </ul>
+            <strong><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Chế Độ Bảo Hành RED GUARANTEE</span></strong>
+            <ul style="list-style-type: square;">
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Tăng thêm 1-2 năm bảo hành tại Hải Triều ngoài chế độ bảo hành Quốc Tế của hãng để có tổng thời gian là 4 năm.</span></li>
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Ưu tiên bảo hành – Đồng hồ sẽ được xếp vào danh sách ưu tiên bảo hành để nhanh chóng quay lại với Quý khách.</span></li>
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Giao nhận đồng hồ bảo hành ngay tại nhà Quý khách.</span></li>
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Cập nhật tình trạng đồng hồ qua điện thoại tới Quý khách. Quý khách được tư vấn, cập nhật tình trạng đồng hồ trong quá trình đồng hồ được bảo hành.</span></li>
+                <li><span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">4 năm đánh bóng đồng hồ miễn phí.</span></li>
+            </ul>
+            <span style="font-family: 'courier new', courier, monospace; font-size: 14pt;">Chính Sách Đổi Hàng</span>
+            <span style="font-family: verdana, geneva, sans-serif; font-size: 10pt;">Trong vòng 7 ngày kể từ ngày mua hàng từ Đồng Hồ Hải Triều, Quý khách có thể yêu cầu đổi hàng hoàn toàn miễn phí. Thời hạn 7 ngày được tính theo dấu bưu điện khi Quý khách gửi sản phẩm về cho chúng tôi hoặc thời gian chúng tôi tiếp nhận yêu cầu trực tiếp (tại cửa hàng) của Quý khách.</span>
+
+            </ul>
+        </div>
+
+
+
+</section>
+
+<!-- featured -->
+<section class="section featured" id="featured">
+    <div class="featured__container container">
+        <div class="title-row">
+            <h2>Đồng hồ có thể bạn sẻ thích</h2>
+            <p>xem ngay</p>
+        </div>
+        <div class="featured__center">
+            @foreach (var item in related)
+            {
+                var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                if (item.PromotionPrice == null)
+                {
+                    <div class="product">
+                        <div class="img__container">
+                            <a href="@url" title="@item.Name">
+                                <img src="@item.Image" alt="" />
+                            </a>
+                        </div>
+                        <div class="product__bottom">
+                            <div class="rating">
+                                <span>
+                                    <svg>
+                                        <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                    </svg>
+                                </span>
+                                <span>
+                                    <svg>
+                                        <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                    </svg>
+                                </span>
+                                <span>
+                                    <svg>
+                                        <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                    </svg>
+                                </span>
+                                <span>
+                                    <svg>
+                                        <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                    </svg>
+                                </span>
+                                <span>
+                                    <svg>
+                                        <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-empty"></use>
+                                    </svg>
+                                </span>
+                            </div>
+                            <h3>@item.Name</h3>
+                            <div class="price">
+                                <span class="price__two">@(item.Price.GetValueOrDefault(0).ToString("N0"))<span class="dong">₫</span></span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="product">
+                        <div class="img__container">
+                            <a href="@url" title="@item.Name">
+                                <img src="@item.Image" alt="" />
+                            </a>
+                        </div>
+                        <div class="product__bottom">
+                            <div class="rating">
+                                <span>
+                                    <svg>
+                                        <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                    </svg>
+                                </span>
+                                <span>
+                                    <svg>
+                                        <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                    </svg>
+                                </span>
+                                <span>
+                                    <svg>
+                                        <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                    </svg>
+                                </span>
+                                <span>
+                                    <svg>
+                                        <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                    </svg>
+                                </span>
+                                <span>
+                                    <svg>
+                                        <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-empty"></use>
+                                    </svg>
+                                </span>
+                            </div>
+                            <h3>@item.Name</h3>
+                            <div class="price">
+                                <span class="price__one">@(item.Price.GetValueOrDefault(0).ToString("N0")) <span class="dong">₫</span></span>
+                                <span class="price__two">@(item.PromotionPrice.GetValueOrDefault(0).ToString("N0"))<span class="dong">₫</span></span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+</section>
+

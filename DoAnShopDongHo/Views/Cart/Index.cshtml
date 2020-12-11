@@ -1,0 +1,198 @@
+﻿@model List<DoAnShopDongHo.Models.CartItem>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section jstop{
+    <link href="/Assets/Client/css/css-cart.css" rel="stylesheet" />
+}
+@section jsFooter{
+    <script src="/Assets/Client/js/Controller/CartController.js"></script>
+}
+
+<section>
+    <div id="container">
+        <div class="wrp">
+            <div id="product" class="cart">
+                <div class="flex">
+                    <div class="left">
+                        <div class="cart_header" style="text-align: center;color: #288ad6;">
+                            THÔNG TIN GIỎ HÀNG
+                        </div>
+                        @if (Model.Count() > 0)
+                        {
+                            <form name="frm_cart" method="post">
+                                <div class="tableCart">
+                                    <div class="row row1">
+                                        <div class="col col1"></div>
+                                        <div class="flex flex_1">
+                                            <div class="col col2 dnmobile">Sản phẩm</div>
+                                            <div class="flex flex_1 dnmobile">
+                                                <div class="col col3">Giá</div>
+                                                <div class="col col4">Số lượng</div>
+                                                <div class="col col5">Thành tiền</div>
+                                                <div class="col col6"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @foreach (var item in Model)
+                                    {
+                                        <div class="row row2">
+                                            <div class="col col1">
+                                                <div class="wImage">
+                                                    <a href="/sp/12886/Dong-ho-Citizen-CT-AR1113-12A.html" title="" class="image">
+                                                        <img data-src="@item.product.Image" class="lazy" alt="" src="@item.product.Image">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="flex flex_1">
+                                                <div class="col col2">
+                                                    <a href="#" title="" class="fHelveticaNeueB">@item.product.Name</a>
+                                                </div>
+                                                <div class="col col3">
+                                                    <span class="fs16">
+                                                        @if (item.product.PromotionPrice == null)
+                                                        {
+                                                            <p><b>@(item.product.Price.GetValueOrDefault(0).ToString("N0")) VNĐ</b></p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p><b>@(item.product.PromotionPrice.GetValueOrDefault(0).ToString("N0")) VNĐ</b></p>
+                                                            <p style="background: #F00;padding: 5px 5px;color: #FFF;border-radius: 25px;text-transform: uppercase;font-weight: bold;width: 80px;text-align: center;">- @(Math.Round((double)(100 - (((item.product.Price.GetValueOrDefault(0) + item.product.PromotionPrice.GetValueOrDefault(0)) / item.product.Price.GetValueOrDefault(0) * 100) - 100))).ToString("N0")) %</p>
+                                                        }
+                                                    </span>
+                                                </div>
+                                                <div class="col col4">
+                                                    <input type="number" min="1" class="input_quantity" name="quantity_12886" data-id="@item.product.ID" value="@item.Quantity" id="quantity_12886">
+                                                    <input type="button" class="update_qty btn btn-danger fff btnUpdate" value="Cập nhật">
+                                                </div>
+                                                <div class="col col5">
+                                                    @if (item.product.PromotionPrice == null)
+                                                    {
+                                                        <span class="fs16 fwb">
+
+                                                            @((item.product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0")) đ
+
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="fs16 fwb">
+
+                                                            @((item.product.PromotionPrice.GetValueOrDefault(0) * item.Quantity).ToString("N0")) đ
+
+                                                        </span>
+                                                    }
+                                                </div>
+                                                <div class="col col6">
+                                                    <a class="btnDelete" href="#" data-id="@item.product.ID">
+                                                        <img data-src="/Assets/Client/images/delete.jpg" class="lazy" alt="" src="/Assets/Client/images/delete.jpg">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                        </div>
+                                    }
+                                    <div class="row row3">
+                                        <div class="lienhe">
+                                            @{
+                                                var tongtien = Model.Sum(x => (x.product.Price.GetValueOrDefault(0)) * x.Quantity);
+                                                var t = Model.Sum(x => x.product.PromotionPrice.GetValueOrDefault(0));
+                                                var tietkiem = tongtien + ((tongtien - t) - tongtien);
+                                                var c = tongtien;
+                                                foreach (var item in Model)
+                                                {
+
+                                                    if (item.product.PromotionPrice != null)
+                                                    {
+                                                        var b = item.product.PromotionPrice.GetValueOrDefault(0) * item.Quantity;
+                                                    }
+                                                    else
+                                                    {
+                                                        var b = item.product.Price.GetValueOrDefault(0) * item.Quantity;
+                                                    }
+
+                                                }
+
+
+                                            }
+                                            <p>Tổng giá trị đơn hàng: <b class="totalPrice" style="color: red;font-size: 18px;text-decoration:line-through;">@tongtien.ToString("N0") VNĐ</b> </p>
+                                            <input type="hidden" name="hdnSumOrder" id="hdnSumOrder" value="8100000">
+                                            <input type="hidden" name="hdnSale2B" id="hdnSale2B" value="0">
+                                            <input type="hidden" name="hdnFGiam" id="hdnFGiam" value="3240000">
+                                            <input type="hidden" name="hdnFlash" id="hdnFlash" value="0">
+
+                                            <p style="color: #3498db;text-align: left;font-size: 18px;font-weight: bold;padding: 6px 0;">Bạn tiết kiệm được: <span id="paySave">@tietkiem.ToString("N0")</span> VNĐ</p>
+                                        </div>
+                                        <div class="totalPrice">Thanh toán: <span id="payOrder"> </span> @t VNĐ </div>
+                                    </div>
+                                    <script>
+
+                                    </script>
+                                    <div class="row row3">
+                                        <div class="lienhe">
+                                            <p>Thông tin liên hệ Hotline: <a href="tel:0867515555" title="086.751.5555">086.751.5555</a> hoặc <a href="tel:0986681189" title="">098.668.1189</a>  - <a href="tel:0985681189" title="">098.568.1189</a> để được hỗ trợ. </p>
+                                            <p>Xin trân trọng cảm ơn !</p>
+                                        </div>
+                                    </div>
+                                    <div class="btnCartGroup tac" style="margin-top: 30px;">
+                                        <a href="/" class="btnCart" title="" style="background: #3498db;padding: 10px 15px;color: #FFF;border-radius: 25px;text-transform: uppercase;">Mua thêm sản phẩm khác <i class="fa fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+
+                            </form>
+                                                }
+                    </div>
+                    <div class="infoDatHang flex_1">
+                        <div class="group">
+                            <div class="c000 fSFUHelveticaCondensedBold ttu fs20 pb20" style="text-align: center;color: #288ad6;">THÔNG TIN LIÊN HỆ</div>
+                            <p class="fsti pb10 tac">Lưu ý: Các ô có dấu <span class="cRed">(*)</span> cần điền đầy đủ thông tin</p>
+                            @using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
+                            {
+                                <div class="form">
+                                    <form class="from_cart_register" action="/cart/" method="post">
+
+                                        <div class="item">
+                                            <p class="label">Họ và tên <span class="cRed">(*)</span></p>
+                                            <input type="text" name="shipName" id="txt_name" placeholder="Nhập họ tên" value="" required="" oninvalid="this.setCustomValidity('Vui lòng nhập họ tên!')" oninput="setCustomValidity('')">
+                                        </div>
+                                        <div class="item">
+                                            <p class="label">Điện thoại <span class="cRed">(*)</span></p>
+                                            <input type="text" name="mobile" id="txt_phone" placeholder="Nhập điện thoại" value="" required="" oninvalid="this.setCustomValidity('Vui lòng nhập số điện thoại')" oninput="setCustomValidity('')">
+                                        </div>
+
+                                        <div class="item">
+                                            <p class="label">Địa chỉ <span class="cRed">(*)</span></p>
+                                            <input type="text" value="" name="address" id="txt_address" placeholder="Nhập địa chỉ" required="" oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ!')" oninput="setCustomValidity('')">
+                                        </div>
+                                        <div class="item">
+                                            <p class="label">Email</p>
+                                            <input type="text" name="email" value="">
+                                        </div>
+                                        <div class="item">
+                                            <p class="label">Nội dung</p>
+                                            <textarea style="min-height: 60px;" name="txt_addition_request" cols="" rows="2"></textarea>
+                                        </div>
+                                        <div class="cb h10"></div>
+                                        <div class="btnThanhToan">
+                                            <button class="tac" name="payment" value="1" type="submit">
+                                                <p class="ttu fHelveticaNeueB fs15">ĐẶT HÀNG THANH TOÁN SAU</p>
+                                                <p>(Trả tiền khi nhận hàng tại nhà)</p>
+                                            </button>
+                                            <button class="tac" name="payment" value="2" type="submit">
+                                                <p class="ttu fHelveticaNeueB fs15">Thanh toán online</p>
+                                                <p>(Bằng thẻ ATM, Visa, Master)</p>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

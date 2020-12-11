@@ -1,0 +1,72 @@
+﻿@model List<KetNoiCSDL.EF.Menu>
+@{
+    var submenu = (List<KetNoiCSDL.EF.ProductCategory>)ViewBag.ProductCategory;
+}
+
+<div class="nav__header">
+    <div class="nav__logo">
+        <h1>SHOP<span>Nero</span></h1>
+    </div>
+
+    <div class="nav__hamburger">
+        <span>
+            <svg>
+                <use xlink:href="./images/sprite.svg#icon-menu"></use>
+            </svg>
+        </span>
+    </div>
+</div>
+
+<div class="nav__menu">
+    <div class="menu__top">
+        <h1 class="nav__category">SHOP<span>Nero</span></h1>
+        <div class="close__toggle">
+            <svg>
+                <use xlink:href="./images/sprite.svg#icon-cross"></use>
+            </svg>
+        </div>
+    </div>
+    <ul class="nav__list">
+        @foreach (var item in Model)
+        {
+            <li class="nav__item">
+                <a href="@item.Link" target="@item.Target" class="nav__link">@item.Text</a>
+                @foreach (var cate in submenu)
+                {
+                    if (item.IDMenu == cate.MenuID)
+                    {
+                        <ul>
+                            @foreach (var Item in submenu.Where(x => x.ParentID == null))
+                            {
+                                var child = submenu.Where(x => x.ParentID == Item.ID);
+                                var display = submenu.Where(x => x.DisplayOrder == Item.ID);
+                                var parentClass = child.Count() > 0 ? "class=subMenu" : "";
+                                <li>
+                                    @if (Item.ParentID == null && Item.MenuID == item.IDMenu)
+                                    {
+                                        <label for="">@Item.NameCategory</label>
+
+
+                                        <div class="subMenu">
+                                            @foreach (var ChildItem in child)
+                                            {
+                                                <a href="/san-pham/@ChildItem.MetaTiile-@ChildItem.ID" title="@ChildItem.NameCategory">
+                                                    @ChildItem.NameCategory
+                                                </a>
+                                            }
+
+                                        </div>}
+                                </li>
+                            }
+                        </ul>
+                    }
+                }
+            </li>
+        }
+    </ul>
+
+
+
+    @{ Html.RenderAction("NumberCart", "Home");}
+</div>
+

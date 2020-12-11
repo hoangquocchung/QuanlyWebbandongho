@@ -1,0 +1,432 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var listNewproduct = (List<KetNoiCSDL.EF.Product>)ViewBag.NewProduct;
+    var ListByProductCategory = (List<KetNoiCSDL.EF.ProductCategory>)ViewBag.ProductCategory;
+    var ListFeatureProduct = (List<KetNoiCSDL.EF.Product>)ViewBag.FeatureProduct;
+}
+@section jsFooter{
+    <link rel="stylesheet" href="/Assets/Client/css/styles.css" />
+}
+<body>
+    
+    <!-- Category-->
+
+    <main>
+
+        <section class="category" id="category">
+            <div class="category___container container">
+                <div class="category__title">
+                    <h1>Cho phép phong cách của bạn phù hợp với tham vọng của bạn!</h1>
+                </div>
+                <div class="category__center">
+                    @foreach (var item in ListByProductCategory)
+                    {
+                        <div class="category__box">
+
+                            <div class="img__cover">
+                                <img src="@item.Image" />
+                            </div>
+
+                            <div class="content">
+                                <h2>@item.NameCategory</h2>
+                                <span>155 product</span>
+                                <a href="san-pham/@item.MetaTiile-@item.ID">shop now</a>
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Section -->
+        <section class="section featured" id="featured">
+            <div class="featured__container container">
+                <div class="title">
+                    <h1 class="primary__title">Featured Products</h1>
+                </div>
+                <div class="featured__center">
+                    @foreach (var item in listNewproduct)
+            {
+                var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                if (item.PromotionPrice == null)
+                {
+                            <div class="product">
+                                <div class="img__container">
+                                    <a href="@url" title="@item.Name">
+                                        <img src="@item.Image" alt="" />
+                                    </a>
+                                </div>
+                                <div class="product__bottom">
+                                    <div class="rating">
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-empty"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <h3>Polar Skate Co Devil T Shirt</h3>
+                                    <div class="price">
+                                        @*<span class="price__one">@(item.Price.GetValueOrDefault(0).ToString("N0")) <span class="dong">₫</span></span>*@
+                                        <span class="price__two">@(item.Price.GetValueOrDefault(0).ToString("N0"))<span class="dong">₫</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="product">
+                                <div class="img__container">
+                                    <a href="@url" title="@item.Name">
+                                        <img src="@item.Image" alt="" />
+                                    </a>
+                                </div>
+                                <div class="product__bottom">
+                                    <div class="rating">
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-empty"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <h3>Polar Skate Co Devil T Shirt</h3>
+                                    <div class="price">
+                                        <span class="price__one">@(item.Price.GetValueOrDefault(0).ToString("N0")) <span class="dong">₫</span></span>
+                                        <span class="price__two">@(item.PromotionPrice.GetValueOrDefault(0).ToString("N0"))<span class="dong">₫</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    }
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Special Offer Banner -->
+        <section class="section special__offer">
+            <div class="offer__container">
+                <h1>KHUYẾN MÃI ĐẶC BIỆT</h1>
+                <p>Ưu đãi đặc biệt giảm giá chỉ áp dụng trong tuần này</p>
+                <a href="#">SHOP NOW</a>
+            </div>
+        </section>
+
+        <!-- Sell Section -->
+        <section class="section sell" id="Sell">
+            <div class="featured__container container">
+                <div class="title">
+                    <h1 class="primary__title">Giảm Giá</h1>
+                </div>
+                <div class="featured__center">
+                    @foreach (var item in listNewproduct)
+                    {
+                        var url = "/chi-tiet/" + item.MetaTitle+ "-" + item.ID;
+                        if (item.PromotionPrice != null)
+                        {
+                            <div class="product">
+                                <div class="img__container">
+                                    <a href="@url" title="@item.Name">
+                                        <img src="@item.Image" alt="" />
+                                    </a>
+                                </div>
+                                <div class="product__bottom">
+                                    <div class="rating">
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-empty"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <h3>@item.Name</h3>
+                                    <div class="price">
+                                        <span class="price__one">@(item.Price.GetValueOrDefault(0).ToString("N0")) <span class="dong">₫</span></span>
+                                        <span class="price__two">@(item.PromotionPrice.GetValueOrDefault(0).ToString("N0"))<span class="dong">₫</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    }
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Hot trend Section -->
+        <section class="section sell" id="Sell">
+            <div class="featured__container container">
+                <div class="title">
+                    <h1 class="primary__title">Hot trend</h1>
+                </div>
+                <div class="featured__center">
+                    @foreach (var item in ListFeatureProduct.Where(x => x.TopHot != null))
+                    {
+                        var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                        if (item.PromotionPrice == null)
+                        {
+                            <div class="product">
+                                <div class="img__container">
+                                    <a href="@url" title="@item.Name">
+                                        <img src="@item.Image" alt="" />
+                                    </a>
+                                </div>
+                                <div class="product__bottom">
+                                    <div class="rating">
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-empty"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <h3>@item.Name</h3>
+                                    <div class="price">
+                                        <span class="price__two">@(item.Price.GetValueOrDefault(0).ToString("N0"))<span class="dong">₫</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="product">
+                                <div class="img__container">
+                                    <a href="@url" title="@item.Name">
+                                        <img src="@item.Image" alt="" />
+                                    </a>
+                                </div>
+                                <div class="product__bottom">
+                                    <div class="rating">
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-full"></use>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg>
+                                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-star-empty"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <h3>@item.Name</h3>
+                                    <div class="price">
+                                        <span class="price__one">@(item.Price.GetValueOrDefault(0).ToString("N0")) <span class="dong">₫</span></span>
+                                        <span class="price__two">@(item.PromotionPrice.GetValueOrDefault(0).ToString("N0"))<span class="dong">₫</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+                    }
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Grid -->
+        <section class="gallary container">
+            <figure class="gallary-item item-1">
+                <img src="/Assets/Client/images/grid-donghocap.jpg" alt="" class="gallary-img">
+                <div class="content">
+                    <h2>Đồng Hồ Cặp</h2>
+                    <a href="#">View more</a>
+                </div>
+            </figure>
+
+            <figure class="gallary-item item-2">
+                <img src="/Assets/Client/images/grid-dong-ho-carnival-nam-7.jpg" alt="" class="gallary-img">
+                <div class="content">
+                    <h2>Đồng Hồ Nam</h2>
+                </div>
+            </figure>
+
+            <figure class="gallary-item item-3">
+                <img src="/Assets/Client/images/grid-donghonu.jpg" alt="" class="gallary-img">
+                <div class="content">
+                    <h2>Đồng Hồ Nữ</h2>
+                </div>
+            </figure>
+
+            <figure class="gallary-item item-4">
+                <img src="/Assets/Client/images/grid-phoi-dong-ho-voi-phu-kien.png" alt="" class="gallary-img">
+                <div class="content">
+                    <h2>Phụ Kiện Đồng Hồ</h2>
+                </div>
+            </figure>
+        </section>
+        <!-- Blog -->
+        <section class="section blog" id="blog">
+            <div class="blog__container container">
+                <div class="title">
+                    <h1 class="primary__title">Tin mới nhất</h1>
+                </div>
+
+                <div class="blog__center">
+                    <div class="blog__box">
+                        <div class="img__cover">
+                            <img src="/Assets/Client/images/blog1.jpg" alt="" />
+                        </div>
+                        <div class="box__content">
+                            <h2>Đây là xu hướng xuất hiện vào mùa thu</h2>
+                            <a href="#">Xem thêm</a>
+                        </div>
+                    </div>
+
+                    <div class="blog__box">
+                        <div class="img__cover">
+                            <img src="/Assets/Client/images/blog2.jpg" alt="" />
+                        </div>
+                        <div class="box__content">
+                            <h2>Đây là xu hướng xuất hiện vào mùa đông</h2>
+                            <a href="#">Xem thêm</a>
+                        </div>
+                    </div>
+
+                    <div class="blog__box">
+                        <div class="img__cover">
+                            <img src="/Assets/Client/images/blog3.jpg" alt="" />
+                        </div>
+                        <div class="box__content">
+                            <h2>Đây là xu hướng xuất hiện vào mùa xuân</h2>
+                            <a href="#">Xem thêm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- PopUp -->
+        <div class="popup">
+            <div class="popup-content">
+                <div class="popup-close">
+                    <svg>
+                        <use xlink:href="/Assets/Client/images/sprite.svg#icon-cross"></use>
+                    </svg>
+                </div>
+                <div class="popup-left">
+                    <div class="popup-img">
+                        <img src="/Assets/Client/images/grid-dong-ho-carnival-nam-7.jpg" alt="popup">
+                    </div>
+                </div>
+                <div class="popup-right">
+                    <div class="right-content">
+                        <h1>Nhận chiết khấu <span style="color: var(--default-color);">30%</span> Ngay</h1>
+                        <p>
+                            Đăng ký website chúng tôi và tiết kiệm 30% cho lần mua hàng tiếp theo. Không có thư rác, chúng tôi hứa!
+                        </p>
+                        <form action="#">
+                            <input type="email" placeholder="Enter your email..." class="popup-form">
+                            <a href="#">Đăng ký</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Footer -->
+    </main>
+    <!-- Custom Script -->
+    <script src="/Assets/Client/js/index.js"></script>
+    <script src="/Assets/Client/js/product.js"></script>
+</body>
+
+</html>

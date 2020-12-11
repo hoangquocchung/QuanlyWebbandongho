@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Glidejs -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.css" />
+
+    <!-- Custom Stylesheet -->
+    <link href="/Assets/Client/css/stylesMain.css" rel="stylesheet" />
+    <link href="/Assets/Client/css/style-product-detail.css" rel="stylesheet" />
+    @RenderSection("jstop", required: false)
+</head>
+
+<body>
+
+    <!--
+          ========================
+          Header
+          ========================
+       -->
+    <header id="header" class="header">
+        <!-- Navigation -->
+        <div class="navigation">
+            <div class="container">
+                <nav class="nav__center">
+                    @{Html.RenderAction("HeaderMain", "Home");}
+                </nav>
+            </div>
+        </div>
+
+    </header>
+
+    <main>
+        @RenderBody()
+        <!-- Newsletter -->
+        <section class="section newsletter" id="newsletter">
+            <div class="newsletter__container container">
+                <div class="newsletter__center">
+                    <div class="newsletter__box">
+                        <h2>Bản tin</h2>
+                        <p>
+                            Đăng ký nhận bản tin của chúng tôi và được giảm giá 20% khi mua hàng đầu tiên
+                        </p>
+                    </div>
+
+                    <div class="newsletter__box" style="padding-top: 2rem;">
+                        <form action="#">
+                            <input type="email" placeholder="Your email" />
+                            <button>SUBSCRIBE</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer id="footer" class="section footer">
+            <div class="container">
+                <div class="footer__top">
+                    <div class="footer-top__box">
+                        <h3>MỞ RỘNG</h3>
+                        <a href="#">Nhãn hiệu</a>
+                        <a href="#">Phiếu quà tặng</a>
+                        <a href="#">Chi nhánh</a>
+                        <a href="#">Đặc biệt</a>
+                        <a href="#">Sơ đồ trang web</a>
+                    </div>
+                    <div class="footer-top__box">
+                        <h3>THÔNG TIN</h3>
+                        <a href="#">Về chúng tôi</a>
+                        <a href="#">Chính sách bảo mật</a>
+                        <a href="#">Điều khoản và điều kiện</a>
+                        <a href="#">Liên hệ chúng tôi</a>
+                        <a href="#">Sơ đồ trang web</a>
+                    </div>
+                    <div class="footer-top__box">
+                        <h3>TÀI KHOẢN</h3>
+                        <a href="#">Tài khoản của tôi</a>
+                        <a href="#">Lịch sử đơn hàng</a>
+                        <a href="#">Danh sách mong muốn</a>
+                        <a href="#">Bản tin</a>
+                        <a href="#">Lợi nhuận</a>
+                    </div>
+                    <div class="footer-top__box">
+                        <h3>LIÊN HỆ VỚI CHÚNG TÔI</h3>
+                        <div>
+                            <span>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-location"></use>
+                                </svg>
+                            </span>
+                            10/8 Nguyễn Bỉnh Khiêm,Team - Huế - Group
+                        </div>
+                        <div>
+                            <span>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-envelop"></use>
+                                </svg>
+                            </span>
+                            Neroqa1999@gmail.com
+                        </div>
+                        <div>
+                            <span>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-phone"></use>
+                                </svg>
+                            </span>
+                            0363636336
+                        </div>
+                        <div>
+                            <span>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-paperplane"></use>
+                                </svg>
+                            </span>
+                            TP.Huế - Việt Nam
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+    </main>
+
+
+
+    <script src="/Assets/Client/js/jquery-3.5.1.min.js"></script>
+    <!-- Custom Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+
+    <!-- Custom Script -->
+    <script src="/Assets/Client/js/index.js"></script>
+    @RenderSection("jsFooter", required: false)
+</body>
+
+</html>

@@ -1,0 +1,235 @@
+﻿@model List<KetNoiCSDL.EF.Product>
+@{
+    ViewBag.Title = "ListProductCategoey";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var category = (KetNoiCSDL.EF.ProductCategory)ViewBag.productCategory;
+}
+
+@section jsFooter{
+    <link href="/Assets/Client/css/style-product.css" rel="stylesheet" />
+}
+
+<!--Bread columns-->
+<div class="breadcrumb container">
+    <li><a href="/">Home</a></li>
+    <li><a href="#">@category.NameCategory</a></li>
+    <li>Đồng Hồ Nam</li>
+</div>
+
+<div class="order container">
+    <div class="price">
+        <span>Giá: </span>
+        <div class="lstPrice">
+            <ul>
+                <li><a href="#" title="Dưới 2 triệu">Dưới 2 triệu</a></li>
+                <li><a href="#" title="Từ 2 - 5 triệu">Từ 2 - 5 triệu</a></li>
+                <li><a href="#" title="Từ 5 - 10 triệu">Từ 5 - 10 triệu</a></li>
+                <li><a href="#" title="Từ 10 - 20 triệu">Từ 10 - 20 triệu</a></li>
+                <li><a href="#" title="Từ 20 - 50 triệu">Từ 20 - 50 triệu</a></li>
+                <li><a href="#" title="Trên 50 Triệu">Trên 50 Triệu</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="order__right">
+        <div class="order__right-title">
+            <span><a href="#"> ĐƯỜNG MẶT KÍNH </a></span>
+            <i class="fa fa-caret-down"></i>
+            <div class="dropdown-content">
+                <div class="content__center">
+                    <a href="#">Dưới 25mm</a>
+                    <a href="#">25 - 31 mm</a>
+                    <a href="#">32 - 37 mm</a>
+                    <a href="#">38 - 42 mm</a>
+                    <a href="#">Trên 42 mm</a>
+                </div>
+            </div>
+        </div>
+        <div class="order__right-title">
+            <span><a href="#">TÍNH NĂNG</a></span>
+            <i class="fa fa-caret-down"></i>
+
+
+        </div>
+        <div class="order__right-title">
+            <span><a href="#">SẮP XẾP</a></span>
+            <i class="fa fa-caret-down"></i>
+        </div>
+    </div>
+
+</div>
+
+<div class="list__choose container">
+    <ul>
+        <li><a href="#">Đồng Hồ <i class="fa fa-times" aria-hidden="true"></i></a></li>
+        <li><a href="#">Đồng Hồ Nam <i class="fa fa-times" aria-hidden="true"></i></a></li>
+    </ul>
+
+</div>
+<!-- Featured Section -->
+<section class="section featured" id="featured" style="padding-bottom: 1rem !important;">
+    <div class="featured__container container">
+        <div class="title" ">
+            <h1 class="primary__title">Đồng Hồ Nam</h1>
+        </div>
+        <div class="checkbox">
+
+        </div>
+        <div class="featured__center">
+            @foreach (var item in Model)
+            {
+                var link = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                <div class="product">
+                    <div class="img__container">
+                        <a href="@link">
+                            <img src="@item.Image" alt="" />
+                        </a>
+                    </div>
+                    <div class="product__bottom">
+                        <div class="rating">
+                            <span>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                            </span>
+                            <span>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                            </span>
+                            <span>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                            </span>
+                            <span>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-full"></use>
+                                </svg>
+                            </span>
+                            <span>
+                                <svg>
+                                    <use xlink:href="./images/sprite.svg#icon-star-empty"></use>
+                                </svg>
+                            </span>
+                        </div>
+                        <h3>@item.Name</h3>
+                        <div class="price">
+                            @if (item.PromotionPrice == null)
+                            {
+                                <span class="price__one">(@item.Price.HasValue ? @item.Price.Value.ToString("N0") <span class="dong">₫</span></span>
+                            }
+                            else
+                            {
+                                <span class="price__one">(@item.Price.HasValue ? @item.PromotionPrice.Value.ToString("N0") <span class="dong">₫</span></span>
+                                <span class="price__two">(@item.Price.HasValue ? @item.Price.Value.ToString("N0")<span class="dong">₫</span></span>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        @if (ViewBag.TotalPage > 1)
+        {
+            var pageDisplay = (int)(ViewBag.MaxPage);
+            int totalPage = (int)ViewBag.TotalPage;
+            int currentPage = ((int)ViewBag.Page);
+            //Create number links
+            var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+            var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+            var link = "/san-pham/" + category.MetaTiile + "-" + category.ID;
+
+            @*<nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        @if (currentPage > ViewBag.First)
+                        {
+                            <li class="page-item"><a href="@link?page=@ViewBag.First" title="Trang đầu" class="page-link" aria-label="Previous"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+                            <li class="page-item"><a href="@link?page=@ViewBag.Prev" title="Trang trước" class="page-link"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                        }
+                        @for (int i = startPageIndex; i < endPageIndex; i++)
+                        {
+                            if (currentPage == i)
+                            {
+                                <li class="page-item"><a href="@link?page=@i" class="page-link" title="Trang @i">@i</a></li>
+                            }
+                            else
+                            {
+                                <li class="page-item"><a href="@link?page=@i" class="page-link">@i</a></li>
+                            }
+                        }
+                        @if (currentPage < totalPage)
+                        {
+                            <li class="page-item"><a href="@link?page=@ViewBag.Next" class="page-link" title="Trang sau"><i class="fa fa-angle-right"></i></a></li>
+                            <li class="page-item"><a href="@link?page=@ViewBag.Last" class="page-link" title="Trang Cuối"><i class="fa fa-angle-double-right"></i></a></li>
+                        }
+                    </ul>
+                </nav>*@
+            <div class="page-btn">
+                @if (currentPage > ViewBag.First)
+                {
+                    <a href="@link?page=@ViewBag.First" title="Trang đầu" aria-label="Previous"><span><i class="fa fa-angle-double-left" aria-hidden="true"></i></span></a>
+                    <a href="@link?page=@ViewBag.Prev" title="Trang trước"><span><i class="fa fa-angle-left" aria-hidden="true"></i></span></a>
+                }
+                @for (int i = startPageIndex; i < endPageIndex; i++)
+                {
+                    if (currentPage == i)
+                    {
+                        <a href="@link?page=@i"  title="Trang @i"><span>@i</span></a>
+                    }
+                    else
+                    {
+                        <a href="@link?page=@i"><span>@i</span></a>
+                    }
+                }
+                @if (currentPage < totalPage)
+                {
+                    <a href="@link?page=@ViewBag.Next" title="Trang sau"><span><i class="fa fa-angle-right"></i></span></a>
+                    <a href="@link?page=@ViewBag.Last"title="Trang Cuối"><span><i class="fa fa-angle-double-right"></i></span></a>
+                }
+            </div>
+        }
+
+    </div>
+</section>
+
+<div class="summary_content_cat container">
+    <p><span style="font-size:16px;">​</span></p>
+
+    <h2 style="text-align: center;"><span style="font-size:22px;"><span style="font-family:arial,helvetica,sans-serif;"><strong>Đồng hồ nam chính hãng - Cao cấp - Giá cực tốt</strong></span></span></h2>
+
+    <p>&nbsp;</p>
+
+    <p style="text-align: justify;"><span style="font-size:16px;"><span style="font-family:arial,helvetica,sans-serif;">Để nói về ý nghĩa và cách chọn đồng hồ thì không phải chàng trai nào cũng biết. Nếu như nữ giới có được đặc quyền sở hữu nhiều món phụ kiện và thay đổi liên tục như túi xách, giày dép, trang sức,... thì đàn ông “may mắn” chỉ có một lựa chọn - Đó là chiếc <u><a href="#" target="_blank">đồng hồ đeo tay</a></u>.</span></span></p>
+
+    <h2 style="text-align: justify;"><span style="font-size:18px;"><span style="font-family:arial,helvetica,sans-serif;"><strong>Lý do mà đàn ông nên đeo đồng hồ</strong></span></span></h2>
+
+    <p style="text-align: justify;"><span style="font-size:16px;"><span style="font-family:arial,helvetica,sans-serif;">Những lý do sau đây sẽ trả lời cho bạn biết vì sao mỗi người đàn ông nên sở hữu một chiếc đồng hồ:</span></span></p>
+
+    <p style="text-align: justify;"><span style="font-size:16px;"><span style="font-family:arial,helvetica,sans-serif;">- Không chỉ dừng lại ở việc nhắc nhở người đeo về thời gian, đồng hồ đối với đàn ông đôi khi là một món phụ kiện thời trang tượng trưng cho sự thành công. Hầu hết các nhà chính trị gia, tỷ phú, doanh nhân thành đạt, các ngôi sao nổi tiếng trên thế giới đều sở hữu&nbsp;rất nhiều đồng hồ đeo tay cao cấp và đắt giá.&nbsp;</span></span></p>
+
+    <p style="text-align: justify;"><span style="font-size:16px;"><span style="font-family:arial,helvetica,sans-serif;">- Đàn ông sẽ thiếu đi vẻ ngoài lịch lãm nếu vắng đi một chiếc đồng hồ đeo tay. Là item an toàn và không kén trang phục, chỉ với sự xuất hiện giản đơn và cách lựa chọn đồng hồ phù hợp sẽ làm cánh mày râu tỏa sáng và ghi điểm trong mắt nữ giới.&nbsp;</span></span></p>
+
+    <p style="text-align: justify;"><span style="font-size:16px;"><span style="font-family:arial,helvetica,sans-serif;">- Không chỉ nữ giới, thậm chí <u><a href="#" target="_blank">đồng hồ nam</a></u> còn được nhiều nhà sản xuất đồng hồ ưu ái hơn về cả thiết kế, đa dạng mẫu mã cũng như chất liệu sử dụng. Quý khách có thể chọn cho mình một chiếc đồng hồ nam dây da, đồng hồ nam dây kim loại hay đơn giản là một chiếc đồng hồ nam dây dù,... tùy vào sở thích và phong cách cá nhân của mình.</span></span></p>
+
+    <h2 style="text-align: justify;"><span style="font-size:18px;"><span style="font-family:arial,helvetica,sans-serif;"><strong>Mua đồng hồ nam chính hãng, giá cực tốt tại NeroShop</strong></span></span></h2>
+
+    <p style="text-align: justify;"><span style="font-size:16px;"><span style="font-family:arial,helvetica,sans-serif;">Những mẫu đồng hồ được trưng bày ở NeroShop đều sở hữu những thiết kế tinh xảo, đẹp mắt cùng chất lượng cao cấp.&nbsp;Đồng hồ nam từ lâu không chỉ được xem là một món phụ kiện để xem giờ mà còn trở thành biểu tượng tạo dựng nên phong cách riêng ấn tượng của chủ sở hữu, một người bạn - một người tri kỷ không thể thiếu.</span></span></p>
+
+    <p style="text-align: justify;"><span style="font-size:16px;"><span style="font-family:arial,helvetica,sans-serif;">Đến với NeroShop bạn có thể thỏa sức khám phá những mẫu <strong>đồng hồ nam đẹp</strong>, thời trang và 100% chính hãng đến từ các thương hiệu đồng hồ nổi tiếng trên thế giới như Nhật Bản, Thụy Sỹ, Tây Ban Nha, Hoa Kỳ, Đức,... Bên cạnh đó, với tầm giá đa dạng từ các mẫu đồng hồ nam cao cấp đến những mẫu tầm trung, những mẫu đồng hồ nam đẹp giá rẻ... chắc chắn sẽ đáp ứng được đa dạng nhu cầu mua sắm của khách hàng.&nbsp;</span></span></p>
+
+    <p style="text-align: justify;"><span style="font-size:16px;"><span style="font-family:arial,helvetica,sans-serif;">Duy nhất tại hệ thống đồng hồ NeroShop bạn sẽ được chăm sóc và tận hưởng những chế độ đãi ngộ và bảo hành tốt nhất trên thị trường. Chúng tôi cam kết hàng chính hãng và giá tốt nhất cho khách hàng.</span></span></p>
+
+    <p>
+        <span style="font-size:16px;">
+            <span style="font-family:arial,helvetica,sans-serif;">
+                <strong>Để được tư vấn cụ thể, Quý khách hàng liên hệ tới NeroShop qua:</strong><br>
+                <strong>Hotline:</strong> <span style="color:#FF0000;">1800 6785</span><br>
+                <strong>Facebook:<a href="https://www.facebook.com/" target="_blank" rel="nofollow"> </a></strong><a href="https://www.facebook.com/" target="_blank" rel="nofollow">https://www.facebook.com/</a><br>
+                <strong>Hệ thống Showroom:</strong> <a href="#" target="_blank">https://www.facebook.com/</a>
+            </span>
+        </span>
+    </p>
+</div>
+
