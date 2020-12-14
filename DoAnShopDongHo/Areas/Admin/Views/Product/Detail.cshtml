@@ -1,0 +1,77 @@
+﻿@model KetNoiCSDL.EF.ProductDetail
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center">Chi Tiết Sản Phẩm</h2>
+<style>
+    .container .flex{display:flex}
+    .left{width:50%;border-right:1px solid #808080;}
+    .left ul{margin:0;padding:0;}
+    .left ul li{list-style:none;display:flex}
+    .left ul li span{color:#e99e27;margin-right:5px;width:40%;padding:5px 0;}
+</style>
+<section>
+    <div class="container">
+        <div class="flex">
+            <div class="left">
+                <ul>
+                    <li><span>Chất liệu dây : </span>@Model.ChatLieuDay</li>
+                    <li><span>Chất liệu mặt: </span>@Model.ChatLieuMat</li>
+                    <li><span>Chất liệu vỏ: </span>@Model.ChatLieuVo</li>
+                    <li><span>Chế độ bảo hành:</span>@Model.CheDoBaoHanh</li>
+                    <li><span>Độ chịu nước:</span>@Model.DoChiuNuoc</li>
+                    <li><span>Đường kính Mắt:</span>@Model.DuongKinhMat</li>
+                    <li><span>Kiểu dáng:</span>@Model.KhieuDang</li>
+                    <li><span>Năng lượng:</span>@Model.nangLuong</li>
+                    <li><span>Size dây:</span>@Model.SizeDay</li>
+                    <li><span>Xuất xứ:</span>@Model.XuatXu</li>
+                </ul>
+            </div>
+            <div class="right">
+                @using (Html.BeginForm("CreateDetail", "product", FormMethod.Post))
+                {
+                    <div class="form">
+                        <form class="from_cart_register" action="Admin/Product/Detail" method="post">
+
+                            <div class="item">
+                                <p class="label">Chất liệu dây</p>
+                                <input type="text" name="chatlieuday" id="txt_name" placeholder="Chất liệu dây" value="" required="">
+                            </div>
+                            <div class="item">
+                                <p class="label">Chất liệu mặt</p>
+                                <input type="text" name="chatlieumat" id="txt_phone" placeholder="Nhập điện thoại" value="" required="">
+                            </div>
+
+                            <div class="item">
+                                <p class="label">Địa chỉ <span class="cRed">(*)</span></p>
+                                <input type="text" value="" name="address" id="txt_address" placeholder="Nhập địa chỉ" required="" oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ!')" oninput="setCustomValidity('')">
+                            </div>
+                            <div class="item">
+                                <p class="label">Email</p>
+                                <input type="text" name="email" value="">
+                            </div>
+                            <div class="item">
+                                <p class="label">Nội dung</p>
+                                <textarea style="min-height: 60px;" name="txt_addition_request" cols="" rows="2"></textarea>
+                            </div>
+                            <div class="cb h10"></div>
+                            <div class="btnThanhToan">
+                                <button class="tac" name="payment" value="1" type="submit">
+                                    <p class="ttu fHelveticaNeueB fs15">ĐẶT HÀNG THANH TOÁN SAU</p>
+                                    <p>(Trả tiền khi nhận hàng tại nhà)</p>
+                                </button>
+                                <button class="tac" name="payment" value="2" type="submit">
+                                    <p class="ttu fHelveticaNeueB fs15">Thanh toán online</p>
+                                    <p>(Bằng thẻ ATM, Visa, Master)</p>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+

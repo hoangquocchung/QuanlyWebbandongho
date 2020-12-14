@@ -19,5 +19,12 @@ namespace DataBaseIO.DBIO
         {
             return db.ProductDetails.Find(id);
         }
+
+        public long Create(ProductDetail entity)
+        {
+            db.ProductDetails.Add(entity);
+            db.SaveChanges();
+            return entity.ID;
+        }
     }
 }

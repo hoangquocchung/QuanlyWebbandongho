@@ -1,66 +1,71 @@
-﻿@model List<KetNoiCSDL.ViewModel.ProductModelView>
+﻿@model List<KetNoiCSDL.EF.Product>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 @section jsFooter{
-
+    <script src="/Assets/Admin/js/Controller/ProductImageController.js"></script>
     <script src="/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/Assets/Admin/js/demo/datatables-demo.js"></script>
 }
 
-<div class="row">
-    @using (Html.BeginForm("Index", "product", FormMethod.Post))
-    {
-        <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-                @*<input type="text" value="@ViewBag.ChuoiTimKiem" name="searchString" />
-    <input type="submit" value="Tìm kiếm" class="input-group-append" style="margin-right:50px;" />*@
-                <a class="btn btn-primary" href="/Admin/product/Create">Thêm mới</a>
-            </div>
+
+@using (Html.BeginForm("Index", "product", FormMethod.Post))
+{
+    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            <input type="text" value="@ViewBag.ChuoiTimKiem" name="searchString" />
+                <input type="submit" value="Tìm kiếm" class="input-group-append" style="margin-right:50px;" />
+            <a class="btn btn-primary" href="/Admin/product/Create">Thêm mới</a>
         </div>
-    }
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Tên Menu</th>
-                <th>Link</th>
-                <th>Thứ tự hiển thị</th>
-                <th></th>
-                <th>Loại menu</th>
-                <th>Status</th>
-                <th>#</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr id="row_@item.ID">
-                    <td>@item.Name</td>
-                    <td>@item.Code</td>
-                    <td>@item.Image</td>
-                    <td>@(item.Price.GetValueOrDefault(0).ToString("N0")) đ</td>
-                    <td>@(item.PromotionPrice.GetValueOrDefault(0).ToString("N0")) đ</td>
-                    <td>@item.NameCategoty</td>
-                    <td><a href="#" class="btn-success" data-id="@item.ID">@(item.Status ? "Kích hoạt" : "Khóa")</a></td>
-                    <td>
-                        <a href="/Admin/Product/Edit/@item.ID">Sửa</a>
-
-                        @*Ajax xóa ID*@
-                        @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
-                   {
-                       Confirm = "Bạn vó muốn xóa người dùng này?",
-                       OnComplete = "$('#row_'" + item.ID + "').remove()",
-                       HttpMethod = "Delete"
-
-                   })
-                    </td>
+    </div>
+}
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>name Product</th>
+                    <th>Code</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Promotion Price</th>
+                    <th>Status</th>
+                    <th>#</th>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr id="row_@item.ID">
+                        <td>@item.Name</td>
+                        <td>@item.Code</td>
+                        <td><img src="@item.Image" style="width:70px;height:70px;"/></td>
+                        <td>@(item.Price.GetValueOrDefault(0).ToString("N0")) đ</td>
+                        <td>@(item.PromotionPrice.GetValueOrDefault(0).ToString("N0")) đ</td>
+                        <td><a href="#" class="btn-success" data-id="@item.ID">@(item.Status ? "Kích hoạt" : "Khóa")</a></td>
+                        <td>
+                            <a href="#" data-id="@item.ID" class="btn-images"><i class="fa fa-file-image"></i></a>
+                            <a href="/Admin/Product/Detail/@item.ID" class="btn-detail"><i class="fa fa-file-alt"></i></a>
+                            <a href="/Admin/Product/Edit/@item.ID"><i class="fa fa-edit"></i></a>
 
-        </tbody>
-    </table>
+                            @*Ajax xóa ID*@
+                            @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                       {
+                           Confirm = "Bạn vó muốn xóa người dùng này?",
+                           OnComplete = "$('#row_'" + item.ID + "').remove()",
+                           HttpMethod = "Delete"
+
+                       })
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
     @if (ViewBag.TotalPage > 1)
     {
         var pageDisplay = (int)(ViewBag.MaxPage);
@@ -80,9 +85,9 @@
                             <li class="paginate_button page-item active">
                                 <a href="@link?page=@ViewBag.First" title="Trang đầu" aria-label="Previous" class="page-link"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
                             </li>
-                            <li class="paginate_button page-item active">
-                                <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="page-link"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
-                            </li>
+                                <li class="paginate_button page-item active">
+                                    <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="page-link"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                                </li>
                         }
                         @for (int i = startPageIndex; i < endPageIndex; i++)
                 {
@@ -104,9 +109,9 @@
                             <li class="paginate_button page-item">
                                 <a href="@link?page=@ViewBag.Next" title="Trang sau" class="page-link"><i class="fa fa-angle-right"></i></a>
                             </li>
-                            <li class="paginate_button page-item">
-                                <a href="@link?page=@ViewBag.Last" title="Trang Cuối" class="page-link"><i class="fa fa-angle-double-right"></i></a>
-                            </li>
+                                <li class="paginate_button page-item">
+                                    <a href="@link?page=@ViewBag.Last" title="Trang Cuối" class="page-link"><i class="fa fa-angle-double-right"></i></a>
+                                </li>
                         }
                     </ul>
                 </div>
@@ -114,3 +119,37 @@
 
         </div>
     }
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="imagesManange">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div style="display:flex">
+                    <div class="imageList img" style="display:flex; margin-bottom: 20px;">
+
+                    </div>
+                </div>
+                
+                <input type="button" id="btnChooImages" style="display: block;width: 100%;" class="btn btn-primary" value="Chọn ảnh" />
+                <input type="hidden" id="hidProductID" value="0"/>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal" id="btn-SaveImages">Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>

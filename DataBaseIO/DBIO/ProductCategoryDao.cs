@@ -120,6 +120,11 @@ namespace DataBaseIO.DBIO
             return db.ProductCategories.Where(x => x.Status == true && x.ParentID == null).ToList();
         }
 
+        public List<ProductCategory> ListByCate()
+        {
+            return db.ProductCategories.Where(x => x.Status == true && x.ParentID != null).ToList();
+        }
+
         public List<Menu> ListAllMenu()
         {
             //var model = db.ProductCategories.Where(x => x.MenuID == id);

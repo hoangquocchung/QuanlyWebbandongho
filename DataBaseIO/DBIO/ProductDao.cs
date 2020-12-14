@@ -1,5 +1,6 @@
 ﻿using KetNoiCSDL.EF;
 using KetNoiCSDL.ViewModel;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,10 +64,19 @@ namespace DataBaseIO.DBIO
 
         // Phần dùng chung cho Admin
 
-        public List<ProductModelView> listAllProductModel(ref int totalRecord, int pageIndex = 1, int pageSize = 2)
+        public List<Product> ListAllProduct(string searchString, ref int totalRecord, int pageIndex = 1, int pageSize = 5)
         {
             totalRecord = db.Products.Count();
-            //IQueryable<Product> model = db.Products;
+            IQueryable<Product> model = db.Products;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.Name.Contains(searchString));
+            }
+            return model.OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        public IEnumerable<ProductModelView> listAllProductModel(int page, int pageSize)
+        {
             var model = (from a in db.Products
                          join b in db.ProductDetails
                          // Trong bảng SanPhams join với bảng ChitietSanphams
@@ -134,9 +144,52 @@ namespace DataBaseIO.DBIO
 
                          });
             // Mỗi bản ghi lấy được sẽ chuyển thành object ProductViewModel
-            model.OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            return model.ToList();
+            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
 
+        }
+
+        public long create(Product entity)
+        {
+            entity.CreatedDate = DateTime.Now;
+            db.Products.Add(entity);
+            db.SaveChanges();
+            return entity.ID;
+        }
+
+        public bool Edit(Product entity)
+        {
+            try
+            {
+                var model = db.Products.Find(entity.ID);
+                model.CategoryID = entity.CategoryID;
+                model.Code = entity.Code;
+                model.CreatedDate = DateTime.Now;
+                model.Description = entity.Description;
+                model.Detail = entity.Detail;
+                model.Image = entity.Image;
+                model.MetaDescriptions = entity.MetaDescriptions;
+                model.MetaTitle = entity.MetaTitle;
+                model.Name = entity.Name;
+                model.Price = entity.Price;
+                model.PromotionPrice = entity.PromotionPrice;
+                model.Quantity = entity.Quantity;
+                model.Status = entity.Status;
+                model.TopHot = entity.TopHot;
+                db.SaveChanges();
+                return true;
+
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public void UpdateImage(long id,string images)
+        {
+            var product = db.Products.Find(id);
+            product.MoreImages = images;
+            db.SaveChanges();
         }
     }
 }

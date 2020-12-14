@@ -7,6 +7,7 @@
 
     <script src="/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
 }
 
 <div class="row">
@@ -32,6 +33,17 @@
                 <th>#</th>
             </tr>
         </thead>
+        <tfoot>
+            <tr>
+                <th>Tên Menu</th>
+                <th>Link</th>
+                <th>Thứ tự hiển thị</th>
+                <th>Target</th>
+                <th>Loại menu</th>
+                <th>Status</th>
+                <th>#</th>
+            </tr>
+        </tfoot>
         <tbody>
             @foreach (var item in Model)
             {
