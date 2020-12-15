@@ -26,5 +26,47 @@ namespace DataBaseIO.DBIO
             db.SaveChanges();
             return entity.ID;
         }
+
+        public bool Update(ProductDetail entity)
+        {
+            try
+            {
+                var model = db.ProductDetails.Find(entity.ID);
+                model.ChatLieuDay = entity.ChatLieuDay;
+                model.ChatLieuMat = entity.ChatLieuMat;
+                model.ChatLieuVo = entity.ChatLieuVo;
+                model.DoChiuNuoc = entity.DoChiuNuoc;
+                model.DuongKinhMat = entity.DuongKinhMat;
+                model.KhieuDang = entity.KhieuDang;
+                model.nangLuong = entity.nangLuong;
+                model.SizeDay = entity.SizeDay;
+                model.XuatXu = entity.XuatXu;
+                model.CheDoBaoHanh = entity.CheDoBaoHanh;
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool Delete(long id)
+        {
+            try
+            {
+                var detial = db.ProductDetails.Find(id);
+                db.ProductDetails.Remove(detial);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+
+        }
+
     }
 }

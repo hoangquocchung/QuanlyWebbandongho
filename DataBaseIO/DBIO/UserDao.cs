@@ -1,4 +1,5 @@
-﻿using KetNoiCSDL.EF;
+﻿using Common;
+using KetNoiCSDL.EF;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace DataBaseIO.DBIO
             db = new MyDB();
         }
 
-        public int Login(string UserName, string passWord)
+        /*public int Login(string UserName, string passWord)
         {
             var res = db.Users.SingleOrDefault(x => x.Username == UserName);
             if (res == null)
@@ -38,6 +39,84 @@ namespace DataBaseIO.DBIO
                     return -2;
                 }
             }
+        }*/
+
+
+        public List<string> GetListCredential(string username)
+        {
+            var user = db.Users.Single(x => x.Username == username);
+            var data = (from a in db.Credentials
+                        join b in db.UserGroups
+                        on a.UserGroupID equals b.ID
+                        join c in db.Roles
+                        on a.RoleID equals c.ID
+                        where b.ID == user.GroupID
+                        select new
+                        {
+                            RoleID = a.RoleID,
+                            UserGroupID = a.UserGroupID
+
+                       }).AsEnumerable().Select(x=> new Credential() {
+                           RoleID = x.RoleID,
+                           UserGroupID = x.UserGroupID
+                       });
+            return data.Select(x=>x.RoleID).ToList();
+        }
+        public int Login(string UserName, string passWord, bool isLoginAdmin = false)
+        {
+            var res = db.Users.SingleOrDefault(x => x.Username == UserName);
+            if (res == null)
+            {
+                return 0;
+            }
+            else
+            {
+                if (isLoginAdmin == true)
+                {
+                    if (res.GroupID == CommonConstants.ADIM_GROUP || res.GroupID == CommonConstants.MODE_GROUP)
+                    {
+                        if (res.Status == false)
+                        {
+                            return -1;
+                        }
+                        else
+                        {
+                            if (res.Password == passWord)
+                            {
+                                return 1;
+                            }
+                            else
+                            {
+                                return -2;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return -3;
+                    }
+
+                }
+                else
+                {
+                    if (res.Status == false)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        if (res.Password == passWord)
+                        {
+                            return 1;
+                        }
+                        else
+                        {
+                            return -2;
+                        }
+                    }
+                }
+            }
+
         }
 
         public User GetByID(string username)

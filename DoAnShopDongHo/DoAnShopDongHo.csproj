@@ -3149,6 +3149,7 @@
     <Content Include="Assets\Admin\plugins\ckeditor\skins\moono-lisa\readme.md" />
     <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\401.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -3185,6 +3186,7 @@
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Models\LoginModels.cs" />
     <Compile Include="Common\CommonConstants.cs" />
+    <Compile Include="Common\HasCredentialAttribute.cs" />
     <Compile Include="Common\MaHoaMd5.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\CartController.cs" />
@@ -3216,6 +3218,10 @@
     <Folder Include="Areas\Admin\Views\BaseController\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{37444d58-de26-40a6-bda9-6e4bf5027a84}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataBaseIO\DataBaseIO.csproj">
       <Project>{4753a81d-0388-4ef2-aa76-e358404a3f0a}</Project>
       <Name>DataBaseIO</Name>

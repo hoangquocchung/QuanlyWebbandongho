@@ -116,12 +116,12 @@
                         <div class="price">
                             @if (item.PromotionPrice == null)
                             {
-                                <span class="price__one">(@item.Price.HasValue ? @item.Price.Value.ToString("N0") <span class="dong">₫</span></span>
+                                <span class="price__one">@item.Price.Value.ToString("N0") <span class="dong">₫</span></span>
                             }
                             else
                             {
-                                <span class="price__one">(@item.Price.HasValue ? @item.PromotionPrice.Value.ToString("N0") <span class="dong">₫</span></span>
-                                <span class="price__two">(@item.Price.HasValue ? @item.Price.Value.ToString("N0")<span class="dong">₫</span></span>
+                                <span class="price__one">@item.Price.Value.ToString("N0") <span class="dong">₫</span></span>
+                                <span class="price__two">@item.PromotionPrice.Value.ToString("N0")<span class="dong">₫</span></span>
                             }
 
                         </div>

@@ -12,6 +12,7 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
     public class UserController : BaseController
     {
         // GET: Admin/User
+        [HasCredential(RoleID = "VIEW_USER")]
         public ActionResult Index(string searchString, int page = 1, int pageSize = 3)
         {
             var dao = new UserDao();
@@ -19,12 +20,15 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
             ViewBag.ChuoiTimKiem = searchString;
             return View(model);
         }
+
+        [HasCredential(RoleID = "ADD_USER")]
         public ActionResult Insert()
         {
             return View();
         }
 
         [HttpPost]
+        [HasCredential(RoleID = "ADD_USER")]
         public ActionResult Insert(User user)
         {
             if (ModelState.IsValid)
@@ -47,6 +51,7 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
             return View("Insert");
         }
 
+        [HasCredential(RoleID = "EDIT_USER")]
         public ActionResult Update(long id)
         {
             var user = new UserDao().ViewDetail(id);
@@ -54,6 +59,7 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [HasCredential(RoleID = "EDIT_USER")]
         public ActionResult Update(User user)
         {
             if (ModelState.IsValid)
@@ -80,12 +86,14 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
         }
 
         [HttpDelete]
+        [HasCredential(RoleID = "DELETE_USER")]
         public ActionResult Delete(long id)
         {
             new UserDao().Delete(id);
             return RedirectToAction("Index");
         }
 
+        [HasCredential(RoleID = "EDIT_USER")]
         public JsonResult ChangeStatus(long id)
         {
             var res = new UserDao().ChangeStatus(id);

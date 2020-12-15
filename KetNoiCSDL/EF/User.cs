@@ -18,6 +18,9 @@ namespace KetNoiCSDL.EF
         public string Password { get; set; }
 
         [StringLength(50)]
+        public string GroupID { get; set; }
+
+        [StringLength(50)]
         public string Name { get; set; }
 
         [StringLength(50)]

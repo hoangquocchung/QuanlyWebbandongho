@@ -39,8 +39,7 @@ namespace DoAnShopDongHo.Controllers
             return Json(new
             {
                 data = ListImagesReturn,
-                status = true
-            });
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ListProductCategoey(long id, int page = 1, int pageSize = 12)

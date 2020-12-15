@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KetNoiCSDL", "KetNoiCSDL\Ke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseIO", "DataBaseIO\DataBaseIO.csproj", "{4753A81D-0388-4EF2-AA76-E358404A3F0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{37444D58-DE26-40A6-BDA9-6E4BF5027A84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4753A81D-0388-4EF2-AA76-E358404A3F0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4753A81D-0388-4EF2-AA76-E358404A3F0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4753A81D-0388-4EF2-AA76-E358404A3F0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37444D58-DE26-40A6-BDA9-6E4BF5027A84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37444D58-DE26-40A6-BDA9-6E4BF5027A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37444D58-DE26-40A6-BDA9-6E4BF5027A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37444D58-DE26-40A6-BDA9-6E4BF5027A84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

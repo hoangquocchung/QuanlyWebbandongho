@@ -10,5 +10,6 @@ namespace DoAnShopDongHo.Common
     {
         public long UserID { set; get; }
         public string Username { set; get; }
+        public string GroupID { set; get; }
     }
 }

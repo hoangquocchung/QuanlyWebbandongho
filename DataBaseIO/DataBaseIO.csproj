@@ -67,6 +67,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{37444d58-de26-40a6-bda9-6e4bf5027a84}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KetNoiCSDL\KetNoiCSDL.csproj">
       <Project>{0f74db88-4540-4905-b580-e62c7f3ad78b}</Project>
       <Name>KetNoiCSDL</Name>

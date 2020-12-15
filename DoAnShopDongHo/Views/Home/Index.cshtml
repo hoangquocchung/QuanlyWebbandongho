@@ -7,9 +7,13 @@
     var ListByProductCategory = (List<KetNoiCSDL.EF.ProductCategory>)ViewBag.ProductCategory;
     var ListFeatureProduct = (List<KetNoiCSDL.EF.Product>)ViewBag.FeatureProduct;
 }
-@section jsFooter{
+@section jstop{
     <link rel="stylesheet" href="/Assets/Client/css/styles.css" />
 }
+@section jsFooter{
+    <script script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+}
+
 <body>
     
     <!-- Category-->
@@ -356,41 +360,57 @@
             </figure>
         </section>
         <!-- Blog -->
-        <section class="section blog" id="blog">
-            <div class="blog__container container">
-                <div class="title">
-                    <h1 class="primary__title">Tin mới nhất</h1>
+        <section class="wrapper section">
+            <div class="title">
+                <h1 class="primary__title">Tin tức</h1>
+            </div>
+            <i class="fa fa-chevron-left prev" aria-hidden="true"></i>
+            <i class="fa fa-chevron-right next" aria-hidden="true"></i>
+            <div class="wrapper__center container">
+                <div class="wrapper__box">
+                    <img src="./images/blog1.jpg" alt="" class="slider-img">
+                    <div class="wrapper__box-info">
+                        <h4><a href="#">One day for will flash before your eyes</a></h4>
+                        <i class="fa fa-user" aria-hidden="true">Awa Melvine </i>
+                        &nbsp;
+                        <i class="fa fa-calendar" aria-hidden="true">Mar 8, 2020</i>
+                    </div>
                 </div>
-
-                <div class="blog__center">
-                    <div class="blog__box">
-                        <div class="img__cover">
-                            <img src="/Assets/Client/images/blog1.jpg" alt="" />
-                        </div>
-                        <div class="box__content">
-                            <h2>Đây là xu hướng xuất hiện vào mùa thu</h2>
-                            <a href="#">Xem thêm</a>
-                        </div>
+                <div class="wrapper__box">
+                    <img src="./images/blog2.jpg" alt="" class="slider-img">
+                    <div class="wrapper__box-info">
+                        <h4><a href="#">One day for will flash before your eyes</a></h4>
+                        <i class="fa fa-user" aria-hidden="true">Awa Melvine </i>
+                        &nbsp;
+                        <i class="fa fa-calendar" aria-hidden="true">Mar 8, 2020</i>
                     </div>
-
-                    <div class="blog__box">
-                        <div class="img__cover">
-                            <img src="/Assets/Client/images/blog2.jpg" alt="" />
-                        </div>
-                        <div class="box__content">
-                            <h2>Đây là xu hướng xuất hiện vào mùa đông</h2>
-                            <a href="#">Xem thêm</a>
-                        </div>
+                </div>
+                <div class="wrapper__box">
+                    <img src="./images/blog3.jpg" alt="" class="slider-img">
+                    <div class="wrapper__box-info">
+                        <h4><a href="#">One day for will flash before your eyes</a></h4>
+                        <i class="fa fa-user" aria-hidden="true">Nero </i>
+                        &nbsp;
+                        <i class="fa fa-calendar" aria-hidden="true">Mar 8, 2020</i>
                     </div>
+                </div>
+                <div class="wrapper__box">
+                    <img src="./images/blog2.jpg" alt="" class="slider-img">
+                    <div class="wrapper__box-info">
+                        <h4><a href="#">One day for will flash before your eyes</a></h4>
+                        <i class="fa fa-user" aria-hidden="true">Nero </i>
+                        &nbsp;
+                        <i class="fa fa-calendar" aria-hidden="true">Mar 8, 2020</i>
 
-                    <div class="blog__box">
-                        <div class="img__cover">
-                            <img src="/Assets/Client/images/blog3.jpg" alt="" />
-                        </div>
-                        <div class="box__content">
-                            <h2>Đây là xu hướng xuất hiện vào mùa xuân</h2>
-                            <a href="#">Xem thêm</a>
-                        </div>
+                    </div>
+                </div>
+                <div class="wrapper__box">
+                    <img src="./images/blog3.jpg" alt="" class="slider-img">
+                    <div class="wrapper__box-info">
+                        <h4><a href="#">One day for will flash before your eyes</a></h4>
+                        <i class="fa fa-user" aria-hidden="true">Nero </i>
+                        &nbsp;
+                        <i class="fa fa-calendar" aria-hidden="true">Mar 8, 2020</i>
                     </div>
                 </div>
             </div>

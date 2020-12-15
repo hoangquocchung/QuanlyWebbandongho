@@ -143,7 +143,45 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
         public ActionResult Detail(long id)
         {
             var model = new ProductDetailsDao().ViewProductDetail(id);
+            ViewBag.Product = new ProductDao().ViewDetail(id);
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Detail(ProductDetail entity,string chedobaohanh,string sizeday,string kieudang,string duongmatkinh)
+        {
+            var model = new ProductDetailsDao();
+            entity.CheDoBaoHanh = chedobaohanh;
+            entity.SizeDay = sizeday;
+            entity.KhieuDang = kieudang;
+            entity.DuongKinhMat = duongmatkinh;
+            var res = model.Update(entity);
+            if (res)
+            {
+                return RedirectToAction("Detail", "Product");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Cập nhật không thành công");
+            }
+            return View("Detail");
+        }
+
+        [HttpDelete]
+        public ActionResult Delete(long id)
+        {
+            new ProductDao().Delete(id);
+            new ProductDetailsDao().Delete(id);
+            return RedirectToAction("Index");
+        }
+
+        public JsonResult ChangeStatus(long id)
+        {
+            var res = new ProductDao().ChangeStatus(id);
+            return Json(new
+            {
+                status = res
+            });
         }
 
 
