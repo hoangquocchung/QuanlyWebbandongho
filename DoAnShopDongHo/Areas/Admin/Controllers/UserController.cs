@@ -57,7 +57,7 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
         public ActionResult Update(long id)
         {
             var user = new UserDao().ViewDetail(id);
-            //SetViewBag(user.GroupID);
+            SetViewBag(user.GroupID);
             return View(user);
         }
 
@@ -85,7 +85,7 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
                 }
 
             }
-            //SetViewBag(user.GroupID);
+            SetViewBag(user.GroupID);
             return View("Update");
         }
 
@@ -107,7 +107,7 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
             });
         }
 
-        public void SetViewBag(long? selectId = null)
+        public void SetViewBag(string selectId = null)
         {
             var dao = new UserGroupDao();
             ViewBag.Usergroup = new SelectList(dao.ListAll(), "ID", "Name", selectId);

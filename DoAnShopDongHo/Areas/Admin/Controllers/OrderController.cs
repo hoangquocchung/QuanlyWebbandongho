@@ -10,7 +10,7 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
     public class OrderController : BaseController
     {
         // GET: Admin/Order
-        public ActionResult Index(long? id,string searchString, int page = 1, int pageSize = 10)
+        public ActionResult Index(long? id,string searchString, int page = 1, int pageSize = 4)
         {
             int totalRecord = 0;
             var model = new OrderDao().ListAllOrder(searchString, ref totalRecord, page, pageSize);
