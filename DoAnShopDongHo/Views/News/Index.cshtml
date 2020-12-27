@@ -1,0 +1,264 @@
+﻿@model List<KetNoiCSDL.EF.Content>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cate = (List<KetNoiCSDL.EF.Category>)ViewBag.cate;
+}
+
+<!--Main-->
+
+@section jstop{
+    
+<link href="/Assets/Client/css/tintuc.css" rel="stylesheet" />
+    }
+@section jsFooter{
+    
+<script src="/Assets/Client/js/tintuc.js"></script>
+    }
+<section class="section blog-new">
+    <div class="container">
+        <div class="grid-2-1-col">
+            <article class="blog-post">
+                <div class="title-new" style="display:flex; justify-content:space-between">
+                    @foreach(var item in cate){
+                    <h1 class="primary-content"><a href="#@item.ID" style="color:#000">@item.Name</a></h1>
+                    }
+                    
+                </div>
+                @foreach (var item in Model)
+                {
+                    <div class="more" id="@item.CategoryID">
+                        <div class="blog-content">
+                            <img class="img-fuid" src="@item.Image">
+                            <div class="post-preview">
+
+                                <h1><a href="#">@item.Name </a></h1>
+                                <i class="fa fa-user" aria-hidden="true"><span>NeroQA</span></i>
+                                &nbsp;
+                                <i class="fa fa-calendar" aria-hidden="true"><span> Thang 1,Nam 2019</span></i>
+                                <p class="preview-text">
+                                    @item.Description
+                                </p>
+                                <a href="/tin-tuc/@item.MetaTitle-@item.ID" class="btn">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                
+
+
+                <div class="more">
+                    <div class="blog-content">
+                        <img class="img-fuid" src="./images/blog1.jpg">
+                        <div class="post-preview">
+
+                            <h1><a href="#">Thông tin rò rỉ Samsung Galaxy S21 Series </a></h1>
+                            <i class="fa fa-user" aria-hidden="true"><span>NeroQA</span></i>
+                            &nbsp;
+                            <i class="fa fa-calendar" aria-hidden="true"><span> Thang 1,Nam 2019</span></i>
+                            <p class="preview-text">
+                                Đoạn video dài 4 phút được đăng tải lên YouTube bởi kênh Random Stuff 2 đã cho thấy toàn bộ thiết kế của Galaxy S21+...
+                            </p>
+                            <a href="#" class="btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="more">
+                    <div class="blog-content">
+                        <img class="img-fuid" src="./images/blog1.jpg">
+                        <div class="post-preview">
+
+                            <h1><a href="#">Thông tin rò rỉ Samsung Galaxy S21 Series </a></h1>
+                            <i class="fa fa-user" aria-hidden="true"><span>NeroQA</span></i>
+                            &nbsp;
+                            <i class="fa fa-calendar" aria-hidden="true"><span> Thang 1,Nam 2019</span></i>
+                            <p class="preview-text">
+                                Đoạn video dài 4 phút được đăng tải lên YouTube bởi kênh Random Stuff 2 đã cho thấy toàn bộ thiết kế của Galaxy S21+...
+                            </p>
+                            <a href="#" class="btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="more">
+                    <div class="blog-content">
+                        <img class="img-fuid" src="./images/blog1.jpg">
+                        <div class="post-preview">
+
+                            <h1><a href="#">Thông tin rò rỉ Samsung Galaxy S21 Series </a></h1>
+                            <i class="fa fa-user" aria-hidden="true"><span>NeroQA</span></i>
+                            &nbsp;
+                            <i class="fa fa-calendar" aria-hidden="true"><span> Thang 1,Nam 2019</span></i>
+                            <p class="preview-text">
+                                Đoạn video dài 4 phút được đăng tải lên YouTube bởi kênh Random Stuff 2 đã cho thấy toàn bộ thiết kế của Galaxy S21+...
+                            </p>
+                            <a href="#" class="btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="more">
+                    <div class="blog-content">
+                        <img class="img-fuid" src="./images/blog1.jpg">
+                        <div class="post-preview">
+
+                            <h1><a href="#">Thông tin rò rỉ Samsung Galaxy S21 Series </a></h1>
+                            <i class="fa fa-user" aria-hidden="true"><span>NeroQA</span></i>
+                            &nbsp;
+                            <i class="fa fa-calendar" aria-hidden="true"><span> Thang 1,Nam 2019</span></i>
+                            <p class="preview-text">
+                                Đoạn video dài 4 phút được đăng tải lên YouTube bởi kênh Random Stuff 2 đã cho thấy toàn bộ thiết kế của Galaxy S21+...
+                            </p>
+                            <a href="#" class="btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="more">
+                    <div class="blog-content">
+                        <img class="img-fuid" src="./images/blog1.jpg">
+                        <div class="post-preview">
+
+                            <h1><a href="#">Thông tin rò rỉ Samsung Galaxy S21 Series </a></h1>
+                            <i class="fa fa-user" aria-hidden="true"><span>NeroQA</span></i>
+                            &nbsp;
+                            <i class="fa fa-calendar" aria-hidden="true"><span> Thang 1,Nam 2019</span></i>
+                            <p class="preview-text">
+                                Đoạn video dài 4 phút được đăng tải lên YouTube bởi kênh Random Stuff 2 đã cho thấy toàn bộ thiết kế của Galaxy S21+...
+                            </p>
+                            <a href="#" class="btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="more">
+                    <div class="blog-content">
+                        <img class="img-fuid" src="./images/blog1.jpg">
+                        <div class="post-preview">
+
+                            <h1><a href="#">Thông tin rò rỉ Samsung Galaxy S21 Series </a></h1>
+                            <i class="fa fa-user" aria-hidden="true"><span>NeroQA</span></i>
+                            &nbsp;
+                            <i class="fa fa-calendar" aria-hidden="true"><span> Thang 1,Nam 2019</span></i>
+                            <p class="preview-text">
+                                Đoạn video dài 4 phút được đăng tải lên YouTube bởi kênh Random Stuff 2 đã cho thấy toàn bộ thiết kế của Galaxy S21+...
+                            </p>
+                            <a href="#" class="btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="more">
+                    <div class="blog-content">
+                        <img class="img-fuid" src="./images/blog1.jpg">
+                        <div class="post-preview">
+
+                            <h1><a href="#">Thông tin rò rỉ Samsung Galaxy S21 Series </a></h1>
+                            <i class="fa fa-user" aria-hidden="true"><span>NeroQA</span></i>
+                            &nbsp;
+                            <i class="fa fa-calendar" aria-hidden="true"><span> Thang 1,Nam 2019</span></i>
+                            <p class="preview-text">
+                                Đoạn video dài 4 phút được đăng tải lên YouTube bởi kênh Random Stuff 2 đã cho thấy toàn bộ thiết kế của Galaxy S21+...
+                            </p>
+                            <a href="#" class="btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="view-more" id="loadMore">Xem thêm <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+            </article>
+
+            <article class="blog-post">
+                <div class="title-new">
+                    <h1 class="primary-content">Bài viết sản phẩm mới</h1>
+                </div>
+
+                <div class="blog-post__center">
+                    <div class="blog-post__box d-flex">
+                        <img src="/images/blog1.jpg" alt="" />
+                        <div class="blog_box-info">
+                            <h4>Sony Xperia 1 II</h4>
+                            <span>Đã ra mắt</span>
+                            <label>9 bài viết</label>
+                        </div>
+                    </div>
+                    <div class="blog-post__box d-flex">
+                        <img src="/images/blog1.jpg" alt="" />
+                        <div class="blog_box-info">
+                            <h4>Sony Xperia 1 II</h4>
+                            <p>Đã ra mắt</p>
+                            <label>9 bài viết</label>
+                        </div>
+                    </div>
+                    <div class="blog-post__box d-flex">
+                        <img src="/images/blog1.jpg" alt="" />
+                        <div class="blog_box-info">
+                            <h4>Sony Xperia 1 II</h4>
+                            <p>Đã ra mắt</p>
+                            <label>9 bài viết</label>
+                        </div>
+                    </div>
+                    <div class="blog-post__box d-flex">
+                        <img src="/images/blog1.jpg" alt="" />
+                        <div class="blog_box-info">
+                            <h4>Sony Xperia 1 II</h4>
+                            <p>Đã ra mắt</p>
+                            <label>9 bài viết</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="title-new">
+                    <h1 class="primary-content">Khuyến Mãi</h1>
+                </div>
+                <div class="blog-post__center">
+                    <img src="/images/blog6.jpg" alt="">
+                    <h4 class="blog-title">Deal hấp dẫn cuối năm: Giảm cực mạnh 5.3 triệu cho chiếc điện thoại cao cấp OPPO Reno3 Pro, nhanh tay sở hữu ngay</h4>
+                </div>
+
+                <div class="promotion">
+                    <div class="promotion__center">
+                        <div class="promotion__box">
+                            <img src="/images/blog6.jpg" alt="">
+                            <h5>Apple tung đòn khuyến mãi cực sốc cuối năm, thẳng tay</h5>
+                        </div>
+                        <div class="promotion__box">
+                            <img src="/images/blog6.jpg" alt="">
+                            <h5>Apple tung đòn khuyến mãi cực sốc cuối năm, thẳng tay</h5>
+                        </div>
+                    </div>
+                    <div class="promotion__center">
+                        <div class="promotion__box">
+                            <img src="/images/blog6.jpg" alt="">
+                            <h5>Apple tung đòn khuyến mãi cực sốc cuối năm, thẳng tay</h5>
+                        </div>
+                        <div class="promotion__box">
+                            <img src="/images/blog6.jpg" alt="">
+                            <h5>Apple tung đòn khuyến mãi cực sốc cuối năm, thẳng tay</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-post__center">
+                    <img src="/images/blog6.jpg" alt="">
+                    <h4 class="blog-title">Deal hấp dẫn cuối năm: Giảm cực mạnh 5.3 triệu cho chiếc điện thoại cao cấp OPPO Reno3 Pro, nhanh tay sở hữu ngay</h4>
+                </div>
+
+                <div class="promotion">
+                    <div class="promotion__center">
+                        <div class="promotion__box">
+                            <img src="/images/blog6.jpg" alt="">
+                            <h5>Apple tung đòn khuyến mãi cực sốc cuối năm, thẳng tay</h5>
+                        </div>
+                        <div class="promotion__box">
+                            <img src="/images/blog6.jpg" alt="">
+                            <h5>Apple tung đòn khuyến mãi cực sốc cuối năm, thẳng tay</h5>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+

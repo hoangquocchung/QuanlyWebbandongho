@@ -14,6 +14,14 @@ namespace DataBaseIO.DBIO
         {
             db = new MyDB();
         }
+        public List<Category> ListAll()
+        {
+            return db.Categories.Where(x => x.Status == true).ToList();
+        }
+        public List<Category> ListAllCate()
+        {
+            return db.Categories.Where(x => x.Status == true).OrderByDescending(x=>x.DisplayOrder).ToList();
+        }
 
     }
 }

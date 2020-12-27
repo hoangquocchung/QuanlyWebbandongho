@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBIO\CategoryDao.cs" />
+    <Compile Include="DBIO\ContentDao.cs" />
     <Compile Include="DBIO\MenuDao.cs" />
     <Compile Include="DBIO\OrderDao.cs" />
     <Compile Include="DBIO\OrderDetailDao.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="DBIO\ProductDao.cs" />
     <Compile Include="DBIO\ProductDetailsDao.cs" />
     <Compile Include="DBIO\UserDao.cs" />
+    <Compile Include="DBIO\UserGroupDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

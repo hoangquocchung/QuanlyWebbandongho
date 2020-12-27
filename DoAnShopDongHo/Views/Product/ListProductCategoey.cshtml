@@ -11,9 +11,10 @@
 
 <!--Bread columns-->
 <div class="breadcrumb container">
-    <li><a href="/">Home</a></li>
-    <li><a href="#">@category.NameCategory</a></li>
-    <li>Đồng Hồ Nam</li>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="#">@category.NameCategory</a></li>
+    </ul>
 </div>
 
 <div class="order container">
@@ -69,7 +70,7 @@
 <section class="section featured" id="featured" style="padding-bottom: 1rem !important;">
     <div class="featured__container container">
         <div class="title" ">
-            <h1 class="primary__title">Đồng Hồ Nam</h1>
+            <h1 class="primary__title">@category.NameCategory</h1>
         </div>
         <div class="checkbox">
 
@@ -116,12 +117,12 @@
                         <div class="price">
                             @if (item.PromotionPrice == null)
                             {
-                                <span class="price__one">@item.Price.Value.ToString("N0") <span class="dong">₫</span></span>
+                                <span class="price__two">@item.Price.Value.ToString("N0") <span class="dong">₫</span></span>
                             }
                             else
                             {
-                                <span class="price__one">@item.Price.Value.ToString("N0") <span class="dong">₫</span></span>
-                                <span class="price__two">@item.PromotionPrice.Value.ToString("N0")<span class="dong">₫</span></span>
+                                <span class="price__two">@item.PromotionPrice.Value.ToString("N0") <span class="dong">₫</span></span>
+                                <span class="price__one">@item.Price.Value.ToString("N0")<span class="dong">₫</span></span>
                             }
 
                         </div>

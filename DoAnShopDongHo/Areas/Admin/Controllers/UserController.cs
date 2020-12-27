@@ -24,6 +24,7 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
         [HasCredential(RoleID = "ADD_USER")]
         public ActionResult Insert()
         {
+            SetViewBag();
             return View();
         }
 
@@ -48,6 +49,7 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
                 }
 
             }
+            SetViewBag();
             return View("Insert");
         }
 
@@ -55,6 +57,7 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
         public ActionResult Update(long id)
         {
             var user = new UserDao().ViewDetail(id);
+            //SetViewBag(user.GroupID);
             return View(user);
         }
 
@@ -82,6 +85,7 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
                 }
 
             }
+            //SetViewBag(user.GroupID);
             return View("Update");
         }
 
@@ -101,6 +105,13 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
             {
                 status = res
             });
+        }
+
+        public void SetViewBag(long? selectId = null)
+        {
+            var dao = new UserGroupDao();
+            ViewBag.Usergroup = new SelectList(dao.ListAll(), "ID", "Name", selectId);
+            //ViewBag.Submenu = new SelectList(dao.ListAllMenu(), "IDMenu", "Text", selectId);
         }
     }
 }

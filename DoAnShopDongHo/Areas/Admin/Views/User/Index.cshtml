@@ -30,6 +30,7 @@
                     <th>Address</th>
                     <th>Phone</th>
                     <th>Email</th>
+                    <th>User Group</th>
                     <th>trạng thái</th>
                     <th>#</th>
                 </tr>
@@ -44,6 +45,7 @@
                         <td>@item.Address</td>
                         <td>@item.Phone</td>
                         <td>@item.Email</td>
+                        <td>@item.GroupID</td>
                         <td><a href="#" class="btn-success" data-id="@item.ID">@(item.Status ? "Kích hoạt" : "Khóa")</a></td>
                         <td>
                             <a href="/Admin/User/Update/@item.ID">Sửa</a>

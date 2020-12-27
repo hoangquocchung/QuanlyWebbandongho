@@ -82,7 +82,7 @@
                             </svg>
                         </a>
 
-                        <a href="#" class="icon__item">
+                        <a href="#" class="icon__item" id="cart">
                             <svg>
                                 <use xlink:href="/Assets/Client/images/sprite.svg#icon-shopping-basket"></use>
                             </svg>
@@ -92,7 +92,9 @@
                 </div>
             </nav>
         </div>
-        <!-- thêm vào đây -->
+
+            <a href="#" class="button">Mua Ngay</a>
+        </div> <!--end shopping-cart -->
     </div>
 
     <!-- Hero -->
@@ -114,3 +116,9 @@
         </a>
     </div>
 </header>
+<script>
+    $("#cart").off('click').on("click", function (e) {
+        e.preventDefault();
+        $(".shopping-cart").fadeToggle("fast");
+    });
+</script>

@@ -60,6 +60,14 @@ namespace DataBaseIO.DBIO
             var model = db.Products.Where(x => x.CategoryID == categoryID).OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize);
             return model.ToList();
         }
+        public List<Product> ListAllProductCateID(long categoryID, ref long totalRecord, int pageIndex = 1, int pageSize = 2)
+        {
+            var model = db.ProductCategories.Find(categoryID);
+            var c = db.ProductCategories.Where(x => x.ParentID == model.ID);
+            totalRecord = db.Products.Where(x => x.CategoryID == categoryID).Count();
+            var product = db.Products.Where(x=> x.CategoryID == categoryID).OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            return product.ToList();
+        }
 
 
         // Phần dùng chung cho Admin

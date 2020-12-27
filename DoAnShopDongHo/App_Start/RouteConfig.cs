@@ -26,9 +26,20 @@ namespace DoAnDoAnShopDongHo
             );
 
             routes.MapRoute(
+                name: " CategoryID",
+                url: "san-pham",
+                defaults: new { controller = "Product", action = "ListProductCate", id = UrlParameter.Optional }, namespaces: new[] { "DoAnShopDongHo.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "News",
                 url: "tin-tuc",
                 defaults: new { controller = "News", action = "Index", id = UrlParameter.Optional }, namespaces: new[] { "DoAnShopDongHo.Controllers" }
+            );
+            routes.MapRoute(
+                name: "News Detail",
+                url: "tin-tuc/{metatitle}-{id}",
+                defaults: new { controller = "News", action = "ContentDetail", id = UrlParameter.Optional }, namespaces: new[] { "DoAnShopDongHo.Controllers" }
             );
 
             routes.MapRoute(

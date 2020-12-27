@@ -1,8 +1,10 @@
-﻿using DataBaseIO.DBIO;
+﻿using Common;
+using DataBaseIO.DBIO;
 using DoAnShopDongHo.Models;
 using KetNoiCSDL.EF;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -140,6 +142,17 @@ namespace DoAnShopDongHo.Controllers
                     detailDao.Insert(orderDetail);
 
                 }
+
+                string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/Client/template/neworder.html"));
+
+                content = content.Replace("{{CustomerName}}", shipName);
+                content = content.Replace("{{Phone}}", mobile);
+                content = content.Replace("{{Email}}", email);
+                content = content.Replace("{{Address}}", email);
+                content = content.Replace("{{Total}}", total.ToString("N0"));
+                var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+                new MailHelper().SenMail(email, "Đơn hàng mới từ OnlineShop", content);
+                new MailHelper().SenMail(toEmail, "Đơn hàng mới từ OnlineShop", content);
             }
             catch
             {

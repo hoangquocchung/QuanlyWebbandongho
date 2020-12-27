@@ -34,9 +34,9 @@
                     @{Html.RenderAction("HeaderMain", "Home");}
                 </nav>
             </div>
-            <!-- thêm vào đây -->
+            <!-- shopping card -->
+            @{Html.RenderAction("_Cart", "Home"); } <!--end shopping-cart -->
         </div>
-
     </header>
 
     <main>
@@ -141,6 +141,12 @@
     <!-- Custom Script -->
     <script src="/Assets/Client/js/index.js"></script>
     @RenderSection("jsFooter", required: false)
+    <script>
+            $("#cart").off('click').on("click", function (e) {
+                e.preventDefault();
+                $(".shopping-cart").fadeToggle("fast");
+            });
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,12 @@
+﻿@model KetNoiCSDL.EF.Content
+@{
+    ViewBag.Title = "ContentDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section blog-new">
+    <div class="container">
+        @Html.Raw(Model.Detail)
+    </div>
+</section>
+

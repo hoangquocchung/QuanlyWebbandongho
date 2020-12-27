@@ -145,6 +145,7 @@ namespace DataBaseIO.DBIO
 
         public long Insert(User entity)
         {
+            entity.CreatedDate = DateTime.Now;
             db.Users.Add(entity);
             db.SaveChanges();
             return entity.ID;
@@ -170,6 +171,8 @@ namespace DataBaseIO.DBIO
                 user.Email = entity.Email;
                 user.Phone = entity.Phone;
                 user.Status = entity.Status;
+                user.CreatedDate = DateTime.Now;
+                user.GroupID = entity.GroupID;
                 db.SaveChanges();
                 return true;
             }

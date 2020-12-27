@@ -48,5 +48,17 @@ namespace DoAnShopDongHo.Controllers
             }
             return PartialView(list);
         }
+
+        [ChildActionOnly]
+        public ActionResult _Cart()
+        {
+            var cart = Session[Common.CommonConstants.CartSession];
+            var list = new List<CartItem>();
+            if (cart != null)
+            {
+                list = (List<CartItem>)cart;
+            }
+            return PartialView(list);
+        }
     }
 }

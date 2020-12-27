@@ -30,5 +30,11 @@ namespace DataBaseIO.DBIO
 
 
         }
+
+        public List<OrderDetail> ListOrdetail(long id)
+        {
+            var model = db.Orders.Find(id);
+            return db.OrderDetails.Where(x => x.OrderID == id).ToList();
+        }
     }
 }

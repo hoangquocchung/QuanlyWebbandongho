@@ -42,7 +42,7 @@ namespace DoAnShopDongHo.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult ListProductCategoey(long id, int page = 1, int pageSize = 12)
+        public ActionResult ListProductCategoey(long id, int page = 1, int pageSize = 8)
         {
             var ProductCategory = new ProductCategoryDao().ViewDetail(id);
             ViewBag.productCategory = ProductCategory;

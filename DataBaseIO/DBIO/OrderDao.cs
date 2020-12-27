@@ -21,5 +21,30 @@ namespace DataBaseIO.DBIO
             db.SaveChanges();
             return order.ID;
         }
+
+        public Order ViewDetail (long id)
+        {
+            return db.Orders.Find(id);
+        }
+
+        public List<Order> ListAllOrder(string searchString, ref int totalRecord, int pageIndex = 1, int pageSize = 5)
+        {
+            totalRecord = db.Orders.Count();
+            IQueryable<Order> model = db.Orders;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.ShipMobile.Contains(searchString));
+            }
+            return model.OrderByDescending(x => x.ID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        public bool ChangeStatus(long id)
+        {
+            var order = db.Orders.Find(id);
+            order.Status = !order.Status;
+
+            db.SaveChanges();
+            return order.Status;
+        }
     }
 }

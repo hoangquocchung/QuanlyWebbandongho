@@ -115,6 +115,7 @@
     <Content Include="Assets\Admin\css\sb-admin-2.min.css" />
     <Content Include="Assets\Admin\css\style.css" />
     <Content Include="Assets\Admin\img\undraw_posting_photo.svg" />
+    <Content Include="Assets\Admin\js\Controller\OrderDetailController.js" />
     <Content Include="Assets\Admin\js\Controller\ProductCategoryController.js" />
     <Content Include="Assets\Admin\js\Controller\ProductDetailController.js" />
     <Content Include="Assets\Admin\js\Controller\ProductImageController.js" />
@@ -2851,6 +2852,7 @@
     <Content Include="Assets\Client\css\style-product.css" />
     <Content Include="Assets\Client\css\styles.css" />
     <Content Include="Assets\Client\css\stylesMain.css" />
+    <Content Include="Assets\Client\css\tintuc.css" />
     <Content Include="Assets\Client\images\banner.jpg" />
     <Content Include="Assets\Client\images\blog1.jpg" />
     <Content Include="Assets\Client\images\blog2.jpg" />
@@ -2878,6 +2880,8 @@
     <Content Include="Assets\Client\js\jquery-3.5.1.min.js" />
     <Content Include="Assets\Client\js\product.js" />
     <Content Include="Assets\Client\js\slider.js" />
+    <Content Include="Assets\Client\js\tintuc.js" />
+    <Content Include="Assets\Client\template\neworder.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
@@ -3150,6 +3154,10 @@
     <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\401.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Content\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Content\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Content\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -3177,9 +3185,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ContentController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubMenuController.cs" />
@@ -3191,6 +3201,7 @@
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -3206,6 +3217,9 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Cart\Success.cshtml" />
     <Content Include="Views\Product\ListProductCategoey.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\ContentDetail.cshtml" />
+    <Content Include="Views\Shared\_Cart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

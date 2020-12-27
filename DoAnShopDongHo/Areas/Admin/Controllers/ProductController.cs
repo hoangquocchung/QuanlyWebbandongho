@@ -10,10 +10,10 @@ using System.Xml.Linq;
 
 namespace DoAnShopDongHo.Areas.Admin.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
         // GET: Admin/Product
-        public ActionResult Index(string searchString, int page = 1, int pageSize = 3)
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
             int totalRecord = 0;
             var model = new ProductDao().ListAllProduct(searchString, ref totalRecord, page, pageSize);
@@ -51,7 +51,7 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
                 var productdetail = new ProductDetailsDao().Create(ID);
                 if (model > 0 && productdetail > 0)
                 {
-                    // SetAlert("Bạn đã thêm thành công", "success");
+                    SetAlert("Bạn đã thêm thành công", "success");
                     return RedirectToAction("Index", "Product");
                 }
                 else
@@ -129,7 +129,7 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
             var res = product.Edit(entity);
             if (res)
             {
-                //SetAlert("Cập nhật dữ liệu thành công", "success");
+                SetAlert("Cập nhật dữ liệu thành công", "success");
                 return RedirectToAction("Index", "Product");
             }
             else
