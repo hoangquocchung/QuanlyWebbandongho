@@ -9,6 +9,20 @@
 @section jsFooter{
     <script src="/Assets/Client/js/Controller/CartController.js"></script>
 }
+@section Upload{
+    <script>
+            
+            $(document).ready(function () {
+                var tt = $('.Thanhtien').val();
+                var t = 0;
+                for (var i = 0; i < tt; i++) {
+                    t += i;
+                }
+                $('').append("<span id=" + "payOrder" + ">" + t + "</span>");
+            });
+            
+    </script>
+}
 
 <section>
     <div id="container">
@@ -37,6 +51,7 @@
                                     </div>
                                     @foreach (var item in Model)
                                     {
+
                                         <div class="row row2">
                                             <div class="col col1">
                                                 <div class="wImage">
@@ -74,14 +89,16 @@
                                                             @((item.product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0")) đ
 
                                                         </span>
+                                                        <input type="text" style="display:none" class="Thanhtien" value="@(item.product.Price.GetValueOrDefault(0) * item.Quantity)" />
                                                     }
                                                     else
                                                     {
-                                                        <span class="fs16 fwb">
+                                                        <span class="fs16 fwb Thanhtien">
 
                                                             @((item.product.PromotionPrice.GetValueOrDefault(0) * item.Quantity).ToString("N0")) đ
 
                                                         </span>
+                                                        <input type="text" style="display:none" class="Thanhtien" value="@(item.product.PromotionPrice.GetValueOrDefault(0) * item.Quantity)" />
                                                     }
                                                 </div>
                                                 <div class="col col6">
@@ -94,39 +111,29 @@
                                         <div>
                                         </div>
                                     }
-                                    <div class="row row3">
-                                        <div class="lienhe">
-                                            @{
-                                                var tongtien = Model.Sum(x => (x.product.Price.GetValueOrDefault(0)) * x.Quantity);
-                                                var t = Model.Sum(x => x.product.PromotionPrice.GetValueOrDefault(0));
-                                                var tietkiem = tongtien + ((tongtien - t) - tongtien);
-                                                var c = tongtien;
-                                                foreach (var item in Model)
-                                                {
-
-                                                    if (item.product.PromotionPrice != null)
-                                                    {
-                                                        var b = item.product.PromotionPrice.GetValueOrDefault(0) * item.Quantity;
-                                                    }
-                                                    else
-                                                    {
-                                                        var b = item.product.Price.GetValueOrDefault(0) * item.Quantity;
-                                                    }
+                                        <div class="row row3">
+                                            <div class="lienhe">
+                                                @{
+                                                    var tongtien = Model.Sum(x => (x.product.Price.GetValueOrDefault(0)) * x.Quantity);
+                                                    var tongtien2 = Model.Sum(x => (x.product.PromotionPrice.GetValueOrDefault(0)) * x.Quantity);
+                                                    var t = Model.Sum(x => x.product.PromotionPrice.GetValueOrDefault(0));
+                                                    var ttt =Model.Sum(x => (((x.product.Price.GetValueOrDefault(0)) * x.Quantity)- (x.product.PromotionPrice.GetValueOrDefault(0)) * x.Quantity));
+                                                    var tietkiem = tongtien + ((tongtien - t) - tongtien);
+                                                    var gia = tongtien - ttt;
 
                                                 }
+                                                
+                                                <p>Tổng giá trị đơn hàng: <b class="totalPrice" style="color: red;font-size: 18px;text-decoration:line-through;">@tongtien.ToString("N0") VNĐ</b> </p>
+                                                <input type="hidden" name="hdnSumOrder" id="hdnSumOrder" value="8100000">
+                                                <input type="hidden" name="hdnSale2B" id="hdnSale2B" value="0">
+                                                <input type="hidden" name="hdnFGiam" id="hdnFGiam" value="3240000">
+                                                <input type="hidden" name="hdnFlash" id="hdnFlash" value="0">
 
-
-                                            }
-                                            <p>Tổng giá trị đơn hàng: <b class="totalPrice" style="color: red;font-size: 18px;text-decoration:line-through;">@tongtien.ToString("N0") VNĐ</b> </p>
-                                            <input type="hidden" name="hdnSumOrder" id="hdnSumOrder" value="8100000">
-                                            <input type="hidden" name="hdnSale2B" id="hdnSale2B" value="0">
-                                            <input type="hidden" name="hdnFGiam" id="hdnFGiam" value="3240000">
-                                            <input type="hidden" name="hdnFlash" id="hdnFlash" value="0">
-
-                                            <p style="color: #3498db;text-align: left;font-size: 18px;font-weight: bold;padding: 6px 0;">Bạn tiết kiệm được: <span id="paySave">@tietkiem.ToString("N0")</span> VNĐ</p>
+                                                <p style="color: #3498db;text-align: left;font-size: 18px;font-weight: bold;padding: 6px 0;">Bạn tiết kiệm được: <span id="paySave">@ttt.ToString("N0")</span> VNĐ</p>
+                                            </div>
+                                            <div class="totalPrice" id="tt">Thanh toán: <span id="payOrder">@gia.ToString("N0") </span> VNĐ</div>
                                         </div>
-                                        <div class="totalPrice">Thanh toán: <span id="payOrder"> </span> @t VNĐ </div>
-                                    </div>
+                                                    
                                     <script>
 
                                     </script>
@@ -142,7 +149,7 @@
                                 </div>
 
                             </form>
-                                                }
+                                                    }
                     </div>
                     <div class="infoDatHang flex_1">
                         <div class="group">

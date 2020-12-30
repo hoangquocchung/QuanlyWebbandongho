@@ -9,6 +9,9 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/Assets/Client/images/favicon.png" type="image/x-icon" />
     <!-- Glidejs -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.css" />
@@ -141,6 +144,7 @@
     <!-- Custom Script -->
     <script src="/Assets/Client/js/index.js"></script>
     @RenderSection("jsFooter", required: false)
+    @RenderSection("Upload", required: false)
     <script>
             $("#cart").off('click').on("click", function (e) {
                 e.preventDefault();

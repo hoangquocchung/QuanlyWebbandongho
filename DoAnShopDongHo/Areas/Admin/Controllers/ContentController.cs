@@ -86,6 +86,13 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
             SetViewBag(model.CategoryID);
             return View("Edit");
         }
+        public string UploadImage(HttpPostedFileBase file)
+        {
+            //vaildate 
+            //xử lí upload
+            file.SaveAs(Server.MapPath("~/Data/images/asd/" + file.FileName));// chỉ ra đường dẫn tương đối của nó
+            return "/Data/images/asd/" + file.FileName;
+        }
 
         public void SetViewBag(long? selectedID = null)
         {

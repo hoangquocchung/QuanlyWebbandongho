@@ -6,17 +6,16 @@
 
 @section jsFooter{
     <script src="/Assets/Admin/js/Controller/ProductImageController.js"></script>
-    <script src="/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    
 }
 
 
 @using (Html.BeginForm("Index", "product", FormMethod.Post))
 {
-    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style="position:relative;top:-78px;left:200px">
         <div class="input-group">
-            <input type="text" value="@ViewBag.ChuoiTimKiem" name="searchString" />
-                <input type="submit" value="Tìm kiếm" class="input-group-append" style="margin-right:50px;" />
-            <a class="btn btn-primary" href="/Admin/product/Create">Thêm mới</a>
+            <input type="text" value="@ViewBag.ChuoiTimKiem" name="searchString" placeholder="Search for..." class="form-control bg-light border-0 small" />
+            <input type="submit" value="Tìm kiếm" class="btn-primary" style="margin-right:50px;" />
         </div>
     </div>
 }
@@ -75,7 +74,8 @@
 
         var link = "/Admin/Product";
         <div class="row">
-            <div class="col-sm-12 col-md-7">
+            <div class="col-sm-12 col-md-7" style="display:flex;justify-content:space-between;margin: 30px 50px">
+                <a class="btn btn-primary" href="/Admin/product/Insert" style="line-height: 38px">Thêm mới</a>
                 <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
                     <ul class="pagination">
                         @if (currentPage > ViewBag.First)

@@ -19,7 +19,7 @@ namespace DoAnShopDongHo.Controllers
         public ActionResult Detatil(long id)
         {
             var product = new ProductDao().ViewDetail(id);
-            ViewBag.ListRelatedProduct = new ProductDao().ListRelatedProduct(id);
+            ViewBag.ListRelatedProduct = new ProductDao().ListRelatedProduct(id,4);
             ViewBag.productDetail = new ProductDetailsDao().ViewProductDetail(id);
             return View(product);
         }
@@ -51,6 +51,30 @@ namespace DoAnShopDongHo.Controllers
             var model = new ProductDao().ListByCategoryId(id, ref totalRecord, page, pageSize);
 
             ViewBag.Page = page;
+            int maxPage = 5;
+            int totalPage = 0;
+
+            totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
+
+            ViewBag.TotalPage = totalPage;
+            ViewBag.MaxPage = maxPage;
+            ViewBag.First = 1;
+            ViewBag.Last = maxPage;
+            ViewBag.Next = page + 1;
+            ViewBag.Prev = page - 1;
+            return View(model);
+        }
+
+        public ActionResult Search(long id, string keyword, int page = 1, int pageSize = 2)
+        {
+            int totalRecord = 0;
+            var model = new ProductDao().Search(keyword, ref totalRecord, page, pageSize);
+
+            var ProductCategory = new ProductCategoryDao().ViewDetail(id);
+            ViewBag.productCategory = ProductCategory;
+
+            ViewBag.Page = page;
+            ViewBag.Keyword = keyword;
             int maxPage = 5;
             int totalPage = 0;
 

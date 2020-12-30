@@ -18,17 +18,55 @@
 </style>
 @section jsFooter{
     <script>
-        $('#btnSelectImage').on('click', function (e) {
+        /*$('#btnSelectImage').on('click', function (e) {
             e.preventDefault();//bỏ qua dấu thăng
             var finder = new CKFinder();
             finder.selectActionFunction = function (url) {
                 $('#txtImage').val(url);
             };
             finder.popup();
-        })
+        })*/
         var editor = CKEDITOR.replace('txtContent', {
             customConfig: '/Assets/Admin/js/plugins/ckeditor/config.js',
         });
+    </script>
+}
+@section UploadImage{
+    <script>
+        $(function () {
+            // đăng ký sự kiện click nút upload
+            $('#SelectImage').click(function () {
+                $('#fileUpload').trigger('click');
+            })
+            //Bắt sự kiện cảu change data của fileUpload
+            $('#fileUpload').change(function () {
+                // kiểm tra trình duyệt có hỗ trợ FormData object hay không
+                // !== là phép so sánh tuyệt đối
+                if (window.FormData !== undefined) {
+                    // lấy dữ liệu rên file Upload
+                    var fileUpload = $('#fileUpload').get(0); // get(0) lấy control đầu tiên
+                    var files = fileUpload.files;//lấy các tập tin trên đó
+                    // tạo đối tượng formdata
+                    var formData = new FormData();
+                    // đưa dữ liệu vào form
+                    formData.append('file', files[0]);// lấy đầu tiên tropng tập tin khi upload 1 thì chỉ nhận đc 1
+                    //Post lên server
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Admin/Content/UploadImage',
+                        contentType: false, // không có header
+                        processData: false, //không sử lý dữ liệu
+                        data: formData,
+                        success: function (url) {
+                            $('#txtImage').val(url);
+                        }
+                        , error: function (err) {
+                            alert('có lỗi khi upload: ' + err.statusText);
+                        }
+                    });
+                }
+            })
+        })
     </script>
 }
 
@@ -69,9 +107,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" }, @id= "txtImage" })
+                @Html.TextBoxFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" }, @id = "txtImage" })
+                <input type="file" id="fileUpload" accept="image/*" name="fileUplad" style="display:none" /> <!--Hiển thị hộp thoại thư mục từ máy tính-->
                 @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
-                <a href="#" id="btnSelectImage" class="btn btn-primary">Chọn ảnh</a>
+                <input type="button" id="SelectImage" class="btn btn-secondary" value="..." />
             </div>
         </div>
 

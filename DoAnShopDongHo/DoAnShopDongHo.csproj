@@ -2861,6 +2861,7 @@
     <Content Include="Assets\Client\images\category-2.jpg" />
     <Content Include="Assets\Client\images\category-3.jpg" />
     <Content Include="Assets\Client\images\delete.jpg" />
+    <Content Include="Assets\Client\images\favicon.png" />
     <Content Include="Assets\Client\images\features-1.jpg" />
     <Content Include="Assets\Client\images\features-2.jpg" />
     <Content Include="Assets\Client\images\features-3.jpg" />
@@ -2872,6 +2873,7 @@
     <Content Include="Assets\Client\images\gridbanner1.jpg" />
     <Content Include="Assets\Client\images\gridbanner2.jpg" />
     <Content Include="Assets\Client\images\loader.svg" />
+    <Content Include="Assets\Client\images\logo_transparent.png" />
     <Content Include="Assets\Client\images\product1.jpg" />
     <Content Include="Assets\Client\images\sprite.svg" />
     <Content Include="Assets\Client\js\Controller\CartController.js" />
@@ -3133,7 +3135,6 @@
     <Content Include="Areas\Admin\Views\Menu\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
     <Content Include="Assets\Admin\plugins\ckeditor\CHANGES.md" />
     <Content Include="Assets\Admin\plugins\ckeditor\LICENSE.md" />
     <Content Include="Assets\Admin\plugins\ckeditor\plugins\scayt\CHANGELOG.md" />
@@ -3158,6 +3159,8 @@
     <Content Include="Areas\Admin\Views\Content\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Content\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Content\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Insert.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Update.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -3220,6 +3223,7 @@
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\News\ContentDetail.cshtml" />
     <Content Include="Views\Shared\_Cart.cshtml" />
+    <Content Include="Views\Product\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

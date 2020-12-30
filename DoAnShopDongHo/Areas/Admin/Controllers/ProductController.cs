@@ -13,7 +13,7 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
     public class ProductController : BaseController
     {
         // GET: Admin/Product
-        public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 5)
         {
             int totalRecord = 0;
             var model = new ProductDao().ListAllProduct(searchString, ref totalRecord, page, pageSize);
@@ -33,34 +33,6 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
             ViewBag.Next = page + 1;
             ViewBag.Prev = page - 1;
             return View(model);
-        }
-
-        public ActionResult Create()
-        {
-            SetViewBag();
-            return View();
-        }
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult Create(Product entity, ProductDetail ID)
-        {
-            if (ModelState.IsValid)
-            {
-                var model = new ProductDao().create(entity);
-                ID.ID = model;
-                var productdetail = new ProductDetailsDao().Create(ID);
-                if (model > 0 && productdetail > 0)
-                {
-                    SetAlert("Bạn đã thêm thành công", "success");
-                    return RedirectToAction("Index", "Product");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Thêm không thành công");
-                }
-            }
-            SetViewBag();
-            return View("Create");
         }
 
         public JsonResult LoadImage(long id)
@@ -118,15 +90,18 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
         public ActionResult Edit(long id)
         {
             var model = new ProductDao().ViewDetail(id);
+            ViewBag.productDetail = new ProductDetailsDao().ViewProductDetail(id);
             SetViewBag(model.ID);
             return View(model);
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit(Product entity)
+        public ActionResult Edit(Product entity,ProductDetail ID)
         {
             var product = new ProductDao();
             var res = product.Edit(entity);
+            ;
+            var detail = new ProductDetailsDao().Update(ID);
             if (res)
             {
                 SetAlert("Cập nhật dữ liệu thành công", "success");
@@ -190,6 +165,61 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
             var dao = new ProductCategoryDao();
             ViewBag.ProductCategoryID = new SelectList(dao.ListByCate(), "ID", "NameCategory", selectId);
             //ViewBag.Submenu = new SelectList(dao.ListAllMenu(), "IDMenu", "Text", selectId);
+        }
+
+        public ActionResult Insert()
+        {
+            SetViewBag();
+            ViewBag.productDetail = new ProductDetail();
+            return View();
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Insert(Product entity, ProductDetail ID)
+        {
+            if (ModelState.IsValid)
+            {
+                var model = new ProductDao().create(entity);
+                ID.ID = model;
+                var detail = new ProductDetailsDao().Create(ID);
+                if (model > 0)
+                {
+                    SetAlert("Bạn đã thêm thành công", "success");
+                    return RedirectToAction("Index", "Product");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm không thành công");
+                }
+            }
+            SetViewBag();
+            return View("Insert");
+        }
+
+        public ActionResult Update(long id)
+        {
+            var model = new ProductDao().ViewDetail(id);
+            ViewBag.productDetail = new ProductDetailsDao().ViewProductDetail(id);
+            SetViewBag(model.ID);
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Update(Product entity, ProductDetail detail)
+        {
+            var product = new ProductDao().Edit(entity);
+            var model = new ProductDetailsDao().Update(detail);
+            if (product)
+            {
+                SetAlert("Cập nhật dữ liệu thành công", "success");
+                return RedirectToAction("Index", "Product");
+            }
+            else
+            {
+                ModelState.AddModelError("", "cập nhật không thành công");
+            }
+            SetViewBag(entity.ID);
+            return View("Update");
         }
 
 

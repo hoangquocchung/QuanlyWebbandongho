@@ -64,6 +64,13 @@ namespace DoAnDoAnShopDongHo
                 defaults: new { controller = "Cart", action = "Success", id = UrlParameter.Optional }, namespaces: new[] { "DoAnShopDongHo.Controllers" }
             );
 
+            //Tìm kiếm
+            routes.MapRoute(
+                name: "Search",
+                url: "tim-kiem",
+                defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional }, namespaces: new[] { "DoAnShopDongHo.Controllers" }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

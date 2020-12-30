@@ -1,23 +1,30 @@
 ﻿@model List<DoAnShopDongHo.Models.CartItem>
 
 <ul class="nav__icons">
-    <a href="#" class="icon__item">
-        <svg>
-            <use xlink:href="./images/sprite.svg#icon-search"></use>
-        </svg>
-    </a>
-
-    <a href="#" class="icon__item">
-        <svg>
-            <use xlink:href="./images/sprite.svg#icon-user"></use>
-        </svg>
-    </a>
-
-    <a href="#" class="icon__item" id="cart">
-        <svg>
-            <use xlink:href="./images/sprite.svg#icon-shopping-basket"></use>
-        </svg>
-        <span>@Model.Count</span>
-    </a>
+    <li>
+        <a href="#" class="icon__item">
+            <svg>
+                <use xlink:href="/Assets/Client/images/sprite.svg#icon-search"></use>
+            </svg>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#" class="icon__item">
+            <svg>
+                <use xlink:href="/Assets/Client/images/sprite.svg#icon-user"></use>
+            </svg>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#" class="icon__item" id="cart">
+            <svg>
+                <use xlink:href="/Assets/Client/images/sprite.svg#icon-shopping-basket"></use>
+            </svg>
+            <span>@Model.Count</span>
+        </a>
+    </li>
+    
 </ul>
 

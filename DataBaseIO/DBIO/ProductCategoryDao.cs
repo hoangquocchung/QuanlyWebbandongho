@@ -1,4 +1,5 @@
-﻿using KetNoiCSDL.EF;
+﻿using Common;
+using KetNoiCSDL.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,6 +63,11 @@ namespace DataBaseIO.DBIO
 
         public long Create(ProductCategory entity)
         {
+            if (!string.IsNullOrEmpty(entity.NameCategory))
+            {
+                var chuyendoi = CommonConstants.utf8Convert1(entity.NameCategory);
+                entity.MetaTiile = chuyendoi;
+            }
             entity.CreatedDate = DateTime.Now;
             db.ProductCategories.Add(entity);
             db.SaveChanges();
@@ -78,7 +84,11 @@ namespace DataBaseIO.DBIO
                 model.DisplayOrder = entity.DisplayOrder;
                 model.Image = entity.Image;
                 model.MenuID = entity.MenuID;
-                model.MetaTiile = entity.MetaTiile;
+                if (!string.IsNullOrEmpty(entity.NameCategory))
+                {
+                    var chuyendoi = CommonConstants.utf8Convert1(entity.NameCategory);
+                    model.MetaTiile = chuyendoi;
+                }
                 model.ParentID = entity.ParentID;
                 model.Status = entity.Status;
                 db.SaveChanges();

@@ -1,4 +1,5 @@
-﻿using KetNoiCSDL.EF;
+﻿using Common;
+using KetNoiCSDL.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,11 @@ namespace DataBaseIO.DBIO
 
         public long Insert(Content id)
         {
+            if (!string.IsNullOrEmpty(id.Name))
+            {
+                var chuyendoi = CommonConstants.utf8Convert1(id.Name);
+                id.MetaTitle = chuyendoi;
+            }
             id.CreatedDate = DateTime.Now;
             db.Contents.Add(id);
             db.SaveChanges();
@@ -49,7 +55,11 @@ namespace DataBaseIO.DBIO
             {
                 var content = db.Contents.Find(id);
                 content.Name = id.Name;
-                content.MetaTitle = id.MetaTitle;
+                if (!string.IsNullOrEmpty(id.Name))
+                {
+                    var chuyendoi = CommonConstants.utf8Convert1(id.Name);
+                    content.MetaTitle= chuyendoi;
+                }
                 content.Description = id.Description;
                 content.Image = id.Image;
                 content.CategoryID = id.CategoryID;

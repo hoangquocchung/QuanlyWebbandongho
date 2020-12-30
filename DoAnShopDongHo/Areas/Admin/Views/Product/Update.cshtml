@@ -1,0 +1,136 @@
+﻿@model KetNoiCSDL.EF.Product
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var detail = (KetNoiCSDL.EF.ProductDetail)ViewBag.productDetail;
+}
+
+<style>
+    .form-horizontal {
+        width: 800px;
+        margin: 80px auto;
+    }
+
+        .form-horizontal .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+            .form-horizontal .form-group .col-md-10 {
+                width: 50px;
+            }
+</style>
+@section jsFooter{
+    <script>
+        $('#btnSelectImage').on('click', function (e) {
+            e.preventDefault();//bỏ qua dấu thăng
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#txtImage').val(url);
+            };
+            finder.popup();
+        })
+        var editor = CKEDITOR.replace('txtContent', {
+            customConfig: '/Assets/Admin/plugins/ckeditor/config.js',
+        });
+        var editor = CKEDITOR.replace('txtContentN', {
+            customConfig: '/Assets/Admin/plugins/ckeditor/config.js',
+        });
+    </script>
+}
+@section UploadImage{
+    <script>
+        $(function () {
+            // đăng ký sự kiện click nút upload
+            $('#SelectImage').click(function () {
+                $('#fileUpload').trigger('click');
+            })
+            //Bắt sự kiện cảu change data của fileUpload
+            $('#fileUpload').change(function () {
+                // kiểm tra trình duyệt có hỗ trợ FormData object hay không
+                // !== là phép so sánh tuyệt đối
+                if (window.FormData !== undefined) {
+                    // lấy dữ liệu rên file Upload
+                    var fileUpload = $('#fileUpload').get(0); // get(0) lấy control đầu tiên
+                    var files = fileUpload.files;//lấy các tập tin trên đó
+                    // tạo đối tượng formdata
+                    var formData = new FormData();
+                    // đưa dữ liệu vào form
+                    formData.append('file', files[0]);// lấy đầu tiên tropng tập tin khi upload 1 thì chỉ nhận đc 1
+                    //Post lên server
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Admin/Content/UploadImage',
+                        contentType: false, // không có header
+                        processData: false, //không sử lý dữ liệu
+                        data: formData,
+                        success: function (url) {
+                            $('#txtImage').val(url);
+                        }
+                        , error: function (err) {
+                            alert('có lỗi khi upload: ' + err.statusText);
+                        }
+                    });
+                }
+            })
+        })
+    </script>
+}
+
+@using (Html.BeginForm("Update", "Product", FormMethod.Post))
+{
+    <div class="form-horizontal">
+        <div class="item">
+            <p class="label">Name</p>
+            <input type="text" name="name" id="txt_chatlieuday" placeholder="@Model.Name" value="@Model.Name">
+        </div>
+        <div class="item">
+            <p class="label">Chất liệu dây</p>
+            <input type="text" name="chatlieuday" id="txt_chatlieuday" placeholder="@detail.ChatLieuDay" value="@detail.ChatLieuDay">
+        </div>
+        <div class="item">
+            <p class="label">Chất liệu mặt</p>
+            <input type="text" name="chatlieumat" id="txt_chatlieumat" placeholder="@detail.ChatLieuMat" value="@detail.ChatLieuMat">
+        </div>
+
+        <div class="item">
+            <p class="label">Chất liệu vỏ</p>
+            <input type="text" value="@detail.ChatLieuVo" name="chatlieuvo" id="txt_chatlieuvo" placeholder="@detail.ChatLieuVo">
+        </div>
+        <div class="item">
+            <p class="label">Độ chịu nước</p>
+            <input type="text" name="dochiunuoc" value="@detail.DoChiuNuoc" placeholder="@detail.DoChiuNuoc">
+        </div>
+        <div class="item">
+            <p class="label">Đường mặt kính</p>
+            <input type="text" name="duongmatkinh" value="@detail.DuongKinhMat" placeholder="@detail.DuongKinhMat">
+        </div>
+        <div class="item">
+            <p class="label">Kiểu dáng</p>
+            <input type="text" name="kieudang" value="@detail.KhieuDang" placeholder="@detail.KhieuDang">
+        </div>
+        <div class="item">
+            <p class="label">Năng lượng</p>
+            <input type="text" name="nangluong" value="@detail.nangLuong" placeholder="@detail.nangLuong">
+        </div>
+        <div class="item">
+            <p class="label">Size Dây</p>
+            <input type="text" name="sizeday" value="@detail.SizeDay" placeholder="@detail.SizeDay">
+        </div>
+        <div class="item">
+            <p class="label">Xuất xứ</p>
+            <input type="text" name="xuatxu" value="@detail.XuatXu" placeholder="@detail.XuatXu">
+        </div>
+        <div class="item">
+            <p class="label">Chế độ bảo hành</p>
+            <input type="text" name="chedobaohanh" value="@detail.CheDoBaoHanh" placeholder="@detail.CheDoBaoHanh">
+        </div>
+
+        <div class="cb h10"></div>
+        <button class="btn btn-primary" name="detail" value="1" type="submit" style="margin-top:10px;border:none;">
+            <p class="">Cập nhật</p>
+        </button>
+    </div>
+}
+

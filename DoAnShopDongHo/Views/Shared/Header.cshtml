@@ -33,66 +33,70 @@
                     <ul class="nav__list">
                         @foreach (var item in Model)
                         {
-                            <li class="nav__item">
-                                <a href="@item.Link" target="@item.Target" class="nav__link">@item.Text</a>
-                                @foreach (var cate in submenu)
+                        <li class="nav__item">
+                            <a href="@item.Link" target="@item.Target" class="nav__link">@item.Text</a>
+                            @foreach (var cate in submenu)
                                 {
                                     if (item.IDMenu == cate.MenuID)
                                     {
-                                        <ul>
-                                            @foreach (var Item in submenu.Where(x => x.ParentID == null))
+                                <ul>
+                                    @foreach (var Item in submenu.Where(x => x.ParentID == null))
                                             {
                                                 var child = submenu.Where(x => x.ParentID == Item.ID);
                                                 var display = submenu.Where(x => x.DisplayOrder == Item.ID);
                                                 var parentClass = child.Count() > 0 ? "class=subMenu" : "";
-                                                <li>
-                                                    @if (Item.ParentID == null)
+                                            <li>
+                                                @if (Item.ParentID == null)
                                                     {
-                                                        <label for="">@Item.NameCategory</label>
+                                                    <label for="">@Item.NameCategory</label>
 
 
-                                                        <div class="subMenu">
-                                                            @foreach (var ChildItem in child)
+                                                    <div class="subMenu">
+                                                        @foreach (var ChildItem in child)
                                                             {
-                                                                <a href="/san-pham/@ChildItem.MetaTiile-@ChildItem.ID" title="@ChildItem.NameCategory">
-                                                                    @ChildItem.NameCategory
-                                                                </a>
+                                                    <a href="/san-pham/@ChildItem.MetaTiile-@ChildItem.ID" title="@ChildItem.NameCategory">
+                                                        @ChildItem.NameCategory
+                                                    </a>
                                                             }
 
-                                                        </div>}
-                                                </li>
+                                                    </div>}
+                                            </li>
                                             }
-                                        </ul>
+                                </ul>
                                     }
                                 }
-                            </li>
+                        </li>
                         }
                     </ul>
 
                     <ul class="nav__icons">
-                        <a href="#" class="icon__item">
-                            <svg>
-                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-search"></use>
-                            </svg>
-                        </a>
+                        <li>
+                            <a href="#" class="icon__item">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
 
-                        <a href="#" class="icon__item">
-                            <svg>
-                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-user"></use>
-                            </svg>
-                        </a>
-
-                        <a href="#" class="icon__item" id="cart">
-                            <svg>
-                                <use xlink:href="/Assets/Client/images/sprite.svg#icon-shopping-basket"></use>
-                            </svg>
-                            <span>2</span>
-                        </a>
+                        <li>
+                            <a href="#" class="icon__item">
+                                <svg>
+                                    <use xlink:href="/Assets/Client/images/sprite.svg#icon-user"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="icon__item" id="cart">
+                                <svg>
+                                    <use xlink:href="/Assets/Client/images/sprite.svg#icon-shopping-basket"></use>
+                                </svg>
+                                <span>2</span>
+                            </a>
+                        </li>
+                        
                     </ul>
                 </div>
             </nav>
         </div>
-
+        <div>
             <a href="#" class="button">Mua Ngay</a>
         </div> <!--end shopping-cart -->
     </div>

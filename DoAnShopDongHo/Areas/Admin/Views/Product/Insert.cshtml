@@ -1,33 +1,36 @@
 ﻿@model KetNoiCSDL.EF.Product
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Insert";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     var detail = (KetNoiCSDL.EF.ProductDetail)ViewBag.productDetail;
 }
-
 <style>
     .form-horizontal {
         width: 800px;
+        margin: 80px auto;
     }
 
-    .form-group {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+        .form-horizontal .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+            .form-horizontal .form-group .col-md-10 {
+                width: 50px;
+            }
 </style>
-
 @section jsFooter{
     <script>
-        /*$('#btnSelectImage').on('click', function (e) {
+        $('#btnSelectImage').on('click', function (e) {
             e.preventDefault();//bỏ qua dấu thăng
             var finder = new CKFinder();
             finder.selectActionFunction = function (url) {
                 $('#txtImage').val(url);
             };
             finder.popup();
-        })*/
+        })
         var editor = CKEDITOR.replace('txtContent', {
             customConfig: '/Assets/Admin/plugins/ckeditor/config.js',
         });
@@ -75,7 +78,8 @@
     </script>
 }
 
-@using (Html.BeginForm("Edit","Product",FormMethod.Post))
+
+@using (Html.BeginForm("Insert", "Product", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -166,6 +170,13 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(Model => detail.ChatLieuDay, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(Model => detail.ChatLieuDay, new { htmlAttributes = new { @class = "form-control" }, @name = "chatlieuday" })
+                @Html.ValidationMessageFor(Model => detail.ChatLieuDay, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
             <label class="control-label col-md-2">Chất liệu dây</label>
             <div class="col-md-10">
                 <input type="text" name="chatlieuday" id="txt_chatlieuday" placeholder="@detail.ChatLieuDay" value="@detail.ChatLieuDay">
@@ -216,7 +227,7 @@
         <div class="form-group">
             <label class="control-label col-md-2">Chất liệu vỏ</label>
             <div class="col-md-10">
-                <input type="text" name="chatlieuvo" id="txt_chatlieuvo" value="@detail.ChatLieuVo">
+                <input type="text" name="chatlieuvo" id="txt_chatlieuvo"value="@detail.ChatLieuVo">
             </div>
         </div>
         <div class="form-group">
@@ -238,7 +249,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Edit" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>

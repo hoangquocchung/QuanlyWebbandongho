@@ -1,4 +1,5 @@
-﻿using KetNoiCSDL.EF;
+﻿using Common;
+using KetNoiCSDL.EF;
 using KetNoiCSDL.ViewModel;
 using PagedList;
 using System;
@@ -41,10 +42,10 @@ namespace DataBaseIO.DBIO
         /// </summary>
         /// <param name="productid"></param>
         /// <returns></returns>
-        public List<Product> ListRelatedProduct(long productid)
+        public List<Product> ListRelatedProduct(long productid,int top)
         {
             var product = db.Products.Find(productid);
-            return db.Products.Where(x => x.ID != productid && x.CategoryID == product.CategoryID).ToList();
+            return db.Products.Where(x => x.ID != productid && x.CategoryID == product.CategoryID).Take(top).ToList();
         }
         /// <summary>
         /// Lấy ra danh sách sản phẩm theo ProductCategory
@@ -67,6 +68,14 @@ namespace DataBaseIO.DBIO
             totalRecord = db.Products.Where(x => x.CategoryID == categoryID).Count();
             var product = db.Products.Where(x=> x.CategoryID == categoryID).OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize);
             return product.ToList();
+        }
+
+        //tìm kiếm
+        public List<Product> Search(string keyword, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
+        {
+            totalRecord = db.Products.Where(x => x.Name.Contains(keyword)).Count();
+            db.Products.OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            return db.Products.ToList();
         }
 
 
@@ -158,6 +167,12 @@ namespace DataBaseIO.DBIO
 
         public long create(Product entity)
         {
+            if (!string.IsNullOrEmpty(entity.Name))
+            {
+                var chuyendoi = CommonConstants.utf8Convert1(entity.Name);
+                entity.MetaTitle = chuyendoi;
+            }
+            
             entity.CreatedDate = DateTime.Now;
             db.Products.Add(entity);
             db.SaveChanges();
@@ -168,6 +183,7 @@ namespace DataBaseIO.DBIO
         {
             try
             {
+                
                 var model = db.Products.Find(entity.ID);
                 model.CategoryID = entity.CategoryID;
                 model.Code = entity.Code;
@@ -176,7 +192,11 @@ namespace DataBaseIO.DBIO
                 model.Detail = entity.Detail;
                 model.Image = entity.Image;
                 model.MetaDescriptions = entity.MetaDescriptions;
-                model.MetaTitle = entity.MetaTitle;
+                if (!string.IsNullOrEmpty(entity.Name))
+                {
+                    var chuyendoi = CommonConstants.utf8Convert1(entity.Name);
+                    model.MetaTitle = chuyendoi;
+                }
                 model.Name = entity.Name;
                 model.Price = entity.Price;
                 model.PromotionPrice = entity.PromotionPrice;
