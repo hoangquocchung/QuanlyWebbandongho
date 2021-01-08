@@ -13,12 +13,12 @@
     <script>
             
             $(document).ready(function () {
-                var tt = $('.Thanhtien').val();
+                var tt = $('.textThanhtien').val();
                 var t = 0;
-                for (var i = 0; i < tt; i++) {
+                for (var i = 0; i < tt; ++i) {
                     t += i;
                 }
-                $('').append("<span id=" + "payOrder" + ">" + t + "</span>");
+                $('#tt').append("Thanh toán: <span id=" + "payOrder" + ">" + t + "</span> VNĐ");
             });
             
     </script>
@@ -68,12 +68,12 @@
                                                     <span class="fs16">
                                                         @if (item.product.PromotionPrice == null)
                                                         {
-                                                            <p><b>@(item.product.Price.GetValueOrDefault(0).ToString("N0")) VNĐ</b></p>
+                                                            <b>@(item.product.Price.GetValueOrDefault(0).ToString("N0")) VNĐ</b>
                                                         }
                                                         else
                                                         {
-                                                            <p><b>@(item.product.PromotionPrice.GetValueOrDefault(0).ToString("N0")) VNĐ</b></p>
-                                                            <p style="background: #F00;padding: 5px 5px;color: #FFF;border-radius: 25px;text-transform: uppercase;font-weight: bold;width: 80px;text-align: center;">- @(Math.Round((double)(100 - (((item.product.Price.GetValueOrDefault(0) + item.product.PromotionPrice.GetValueOrDefault(0)) / item.product.Price.GetValueOrDefault(0) * 100) - 100))).ToString("N0")) %</p>
+                                                            <b>@(item.product.PromotionPrice.GetValueOrDefault(0).ToString("N0")) VNĐ</b>
+                                                            <b style="background: #F00;padding: 5px 5px;color: #FFF;border-radius: 25px;text-transform: uppercase;font-weight: bold;width: 80px;text-align: center;">- @(Math.Round((double)(100 - (((item.product.Price.GetValueOrDefault(0) + item.product.PromotionPrice.GetValueOrDefault(0)) / item.product.Price.GetValueOrDefault(0) * 100) - 100))).ToString("N0")) %</b>
                                                         }
                                                     </span>
                                                 </div>
@@ -89,7 +89,7 @@
                                                             @((item.product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0")) đ
 
                                                         </span>
-                                                        <input type="text" style="display:none" class="Thanhtien" value="@(item.product.Price.GetValueOrDefault(0) * item.Quantity)" />
+                                                        <input type="text" style="display:block" class="textThanhtien" value="@(item.product.Price * item.Quantity)" />
                                                     }
                                                     else
                                                     {
@@ -98,7 +98,7 @@
                                                             @((item.product.PromotionPrice.GetValueOrDefault(0) * item.Quantity).ToString("N0")) đ
 
                                                         </span>
-                                                        <input type="text" style="display:none" class="Thanhtien" value="@(item.product.PromotionPrice.GetValueOrDefault(0) * item.Quantity)" />
+                                                        <input type="text" style="display:block" class="textThanhtien" value="@(item.product.PromotionPrice * item.Quantity)" />
                                                     }
                                                 </div>
                                                 <div class="col col6">
@@ -131,7 +131,7 @@
 
                                                 <p style="color: #3498db;text-align: left;font-size: 18px;font-weight: bold;padding: 6px 0;">Bạn tiết kiệm được: <span id="paySave">@ttt.ToString("N0")</span> VNĐ</p>
                                             </div>
-                                            <div class="totalPrice" id="tt">Thanh toán: <span id="payOrder">@gia.ToString("N0") </span> VNĐ</div>
+                                            <div class="totalPrice" id="tt">@*Thanh toán: <span id="payOrder">@gia.ToString("N0") </span> VNĐ*@</div>
                                         </div>
                                                     
                                     <script>

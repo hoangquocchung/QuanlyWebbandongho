@@ -11,7 +11,7 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
     public class ProductCategoryController : BaseController
     {
         // GET: Admin/ProductCategory
-        public ActionResult Index(string searchString, int page = 1, int pageSize = 3)
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 5)
         {
             int totalRecord = 0;
             var model = new ProductCategoryDao().ListAllProductCate(searchString, ref totalRecord, page, pageSize);

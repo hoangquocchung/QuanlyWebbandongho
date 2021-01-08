@@ -13,7 +13,7 @@ namespace DoAnShopDongHo.Areas.Admin.Controllers
     {
         // GET: Admin/User
         [HasCredential(RoleID = "VIEW_USER")]
-        public ActionResult Index(string searchString, int page = 1, int pageSize = 3)
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 4)
         {
             var dao = new UserDao();
             var model = dao.ListAllPaging(searchString, page, pageSize);

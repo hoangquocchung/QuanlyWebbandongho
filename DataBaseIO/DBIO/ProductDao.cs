@@ -243,5 +243,13 @@ namespace DataBaseIO.DBIO
             db.SaveChanges();
             return product.Status;
         }
+
+        public bool updateQuantity(Product entity)
+        {
+            var mode = db.Products.Find(entity.ID);
+            entity.Quantity = mode.Quantity;
+            db.SaveChanges();
+            return true;
+        }
     }
 }
